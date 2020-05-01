@@ -19,11 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 
 //rutas con Autenticación
 Route::middleware(['auth'])->group(function () {
+  Route::get('/home', 'HomeController@index')->name('home');
     /*-------------------Roles------------------*/
     //crear rol (post)
       Route::post('roles/store', 'RoleController@store')->name('roles.store')
@@ -132,4 +131,7 @@ Route::middleware(['auth'])->group(function () {
     //Elimina un user
       Route::delete('user/{user}', 'UserController@destroy')->name('user.destroy')
             ->middleware('permission:user.destroy');
+
+
+      Route::get('logout', 'Auth\LoginController@logout');
 });
