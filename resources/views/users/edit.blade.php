@@ -26,9 +26,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                 Modificar Usuario
             </div>
             <div class="card-body" style="padding:30px">
-                <form method="post" action="{{route('user.show', $user->id)}}" enctype="multipart/form-data">
-                    @csrf
-                    {{ method_field('PUT') }}
+                {!!Form::model($user, ['route' => ['user.update', $user->id], 'method' => 'PUT'])!!}
+
                     <fieldset class="form-group">
                         <label for="name">Nombre</label>
                         <input type="text" class="form-control" id="name" name="name" value='{{$user->name}}'>
@@ -47,14 +46,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 
                             <li>
                                 <label>
-                                  {{Form::checkbox('roles[]', $role->id,
-                                    function () {
-                                        if (in_array($role, $user->roles, true)) {
-                                          return null;
-                                        }
-                                        
-                                      }
-                                    )}}
+                                  {{Form::checkbox('roles[]', $role->id,null)}}
                                   {{$role->name}}
                                   <em>({{$role->description ?: 'Sin descripcion'}})</em>
                                 </label>
@@ -66,12 +58,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                     </fieldset>
 
                     <div class="form-group text-center">
-                        <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
-                            Enviar
-                        </button>
+                        {{Form::submit('Guardar', ['class'=>'btn btn-sm btn-primary'])}}
                     </div>
 
-                </form>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
