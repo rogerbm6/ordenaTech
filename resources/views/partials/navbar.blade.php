@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 <header class="header text-center">
-    <h1 class="blog-name pt-lg-4 mb-0"><a href="/home">LalaSlou admin</a></h1>
+    <h1 class="blog-name pt-lg-4 mb-0"><a href="/home">{{config('app.name', 'Laravel')}}</a></h1>
 
     <nav class="navbar navbar-expand-lg navbar-dark">
 
@@ -33,21 +33,30 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
             <!--//profile-section-->
 
             <ul class="navbar-nav flex-column text-left">
-                <li class="nav-item {{ Request::is('/home') ? 'active' : ''}}">
+                <li class="nav-item {{ Request::is('home') ? 'active' : ''}}">
                     <a class="nav-link" href="/home"><i class="fas fa-university fa-fw mr-2"></i>Resumen <span class="sr-only">(current)</span></a>
                 </li>
                 @can('clientes.index')
-                  <li class="nav-item {{ Request::is('cliente') && ! Request::is('cliente/show')? 'active' : ''}}">
-                      <a class="nav-link" href="{{route('clientes.index')}}"><i class="fas fa-address-book fa-fw mr-2"></i>Clientes</a>
+                  <li class="nav-item {{ Request::is('cliente')? 'active' : ''}}">
+                      <a class="nav-link" href="{{route('clientes.index')}}"><i class="fas fa-users fa-fw mr-2"></i>Clientes</a>
                   </li>
                 @endcan
-                <li class="nav-item {{ Request::is('productos') ? 'active' : ''}}">
-                    <a class="nav-link" href="/productos"><i class="fa fa-cube fa-fw mr-2"></i>Productos</a>
+                @can('producto.index')
+                <li class="nav-item {{ Request::is('producto') ? 'active' : ''}}">
+                    <a class="nav-link" href="{{route('producto.index')}}"><i class="fa fa-cube fa-fw mr-2"></i>Productos</a>
                 </li>
+                @endcan
+                @can('almacenes.index')
+                <li class="nav-item {{ Request::is('almacen') ? 'active' : ''}}">
+                    <a class="nav-link" href="{{route('almacenes.index')}}"><i class="fas fa-warehouse fa-fw mr-2"></i></i>Almacenes</a>
+                </li>
+                @endcan
 
-                <li class="nav-item {{ Request::is('productos') ? 'active' : ''}}">
-                    <a class="nav-link" href="/productos"><i class="fas fa-warehouse fa-fw mr-2"></i></i>Almacenes</a>
+                @can('user.index')
+                <li class="nav-item {{ Request::is('user') ? 'active' : ''}}">
+                    <a class="nav-link" href="{{route('user.index')}}"><i class="fas fa-users-cog fa-fw mr-2"></i></i>Usuarios</a>
                 </li>
+                @endcan
 
                 <li class="nav-item mt-3">
                     <a class="nav-link mt-5" href="/logout">Cerrar sesion<i class="fas fa-sign-out-alt mx-1"></i></a>

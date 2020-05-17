@@ -53,18 +53,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
         <div class="card-header border-0">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">Clientes</h3>
+                    <h3 class="mb-0">Productos</h3>
                 </div>
-                @can('clientes.create')
+                @can('producto.create')
                 <div class="col text-right d-inline p-1">
-                    <a type="button" class="btn btn-sm btn-primary m-1" href="{{route('clientes.create')}}">
+                    <a type="button" class="btn btn-sm btn-primary m-1" href="{{route('producto.redirect')}}">
                         <i class="fa fa-plus-square"></i>
-                        Nuevo
+                        Nuevo producto
                     </a>
 
-                    @endcan
-
                 </div>
+                @endcan
             </div>
         </div>
         <div class="table-responsive">
@@ -72,38 +71,44 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
             <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                     <tr>
+                        <th scope="col">S/N</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Tipo</th>
-                        <th scope="col">Telefono</th>
-                        <th scope="col">Dirección</th>
-                        <th scope="col"></th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Almacen</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($clientes as $cliente)
+                    @foreach ($productos as $producto)
 
 
                     <tr>
-                        <td scope="row">
-                            {{$cliente->nombre}}
-                        </td>
-                        <th>
-                            {{$cliente->tipo}}
-                        </th>
-                        <th>
-                            {{$cliente->telefono}}
+                        <th scope="row">
+                            {{$producto->numero_serie}}
                         </th>
                         <td>
-                            {{$cliente->direccion ? : 'No tiene'}}
+                            {{$producto->nombre}}
                         </td>
                         <td>
-                          @can ('clientes.show')
-                            <a type="button" class="btn btn-sm btn-success" href="{{route('clientes.show', $cliente->id)}}">
+                            {{$producto->marca}}
+                        </td>
+                        <th>
+                            {{$producto->cantidad}}
+                        </th>
+                        <th>
+                            {{$producto->cliente->nombre}}
+                        </th>
+                        <th>
+                            {{$producto->almacene->nombre}}
+                        </th>
+                        <td>
+                            @can('producto.show')
+                            <a type="button" class="btn btn-sm btn-success" href="{{route('producto.show', $producto->id)}}">
                                 <i class="fas fa-address-book fa-fw mr-2"></i>Ver
                             </a>
-                          @endcan
-
+                            @endcan
                         </td>
 
                     </tr>

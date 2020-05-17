@@ -46,12 +46,15 @@ Route::middleware(['auth'])->group(function () {
       Route::delete('roles/{rol}', 'RoleController@destroy')->name('roles.destroy')
             ->middleware('permission:roles.destroy');
 
-    /*-------------------Productos------------------*//*
+    /*-------------------Productos------------------*/
     //crear producto (post)
-      Route::post('producto/store', 'ProductoController@store')->name('producto.store')
+      Route::post('producto/{cliente}/store', 'ProductoController@store')->name('producto.store')
+            ->middleware('permission:producto.create');
+    //Envía a clientes para agregar producto
+      Route::get('producto/redirect', 'ProductoController@redirect')->name('producto.redirect')
             ->middleware('permission:producto.create');
     //Crea producto (get)
-      Route::get('producto/create', 'ProductoController@create')->name('producto.create')
+      Route::get('producto/{cliente}/create', 'ProductoController@create')->name('producto.create')
             ->middleware('permission:producto.create');
     //Muesta productos
       Route::get('producto', 'ProductoController@index')->name('producto.index')
@@ -63,11 +66,11 @@ Route::middleware(['auth'])->group(function () {
       Route::put('producto/{producto}', 'ProductoController@update')->name('producto.update')
             ->middleware('permission:producto.edit');
     //formulario de actualizar
-      Route::post('producto/{producto}/edit', 'ProductoController@edit')->name('producto.edit')
+      Route::get('producto/{producto}/edit', 'ProductoController@edit')->name('producto.edit')
             ->middleware('permission:producto.edit');
     //Elimina un producto
       Route::delete('producto/{producto}', 'ProductoController@destroy')->name('producto.destroy')
-            ->middleware('permission:producto.destroy');*/
+            ->middleware('permission:producto.destroy');
 
     /*-------------------Almacenes------------------*/
     //crear almacen (post)
@@ -86,7 +89,7 @@ Route::middleware(['auth'])->group(function () {
       Route::put('almacen/{almacen}', 'AlmacenController@update')->name('almacenes.update')
             ->middleware('permission:almacenes.edit');
     //formulario de actualizar
-      Route::post('almacen/{almacen}/edit', 'AlmacenController@edit')->name('almacenes.edit')
+      Route::get('almacen/{almacen}/edit', 'AlmacenController@edit')->name('almacenes.edit')
             ->middleware('permission:almacenes.edit');
     //Elimina un almacen
       Route::delete('almacen/{almacen}', 'AlmacenController@destroy')->name('almacenes.destroy')
@@ -109,7 +112,7 @@ Route::middleware(['auth'])->group(function () {
       Route::put('cliente/{cliente}', 'ClienteController@update')->name('clientes.update')
             ->middleware('permission:clientes.edit');
     //formulario de actualizar
-      Route::post('cliente/{cliente}/edit', 'ClienteController@edit')->name('clientes.edit')
+      Route::get('cliente/{cliente}/edit', 'ClienteController@edit')->name('clientes.edit')
             ->middleware('permission:clientes.edit');
     //Elimina un producto
       Route::delete('cliente/{cliente}', 'ClienteController@destroy')->name('clientes.destroy')
@@ -126,7 +129,7 @@ Route::middleware(['auth'])->group(function () {
       Route::put('user/{user}', 'UserController@update')->name('user.update')
             ->middleware('permission:user.edit');
     //formulario de actualizar
-      Route::post('user/{user}/edit', 'UserController@edit')->name('user.edit')
+      Route::get('user/{user}/edit', 'UserController@edit')->name('user.edit')
             ->middleware('permission:user.edit');
     //Elimina un user
       Route::delete('user/{user}', 'UserController@destroy')->name('user.destroy')

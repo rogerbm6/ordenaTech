@@ -150,5 +150,42 @@ class PermissionsTableSeeder extends Seeder
         'slug'        =>  'almacenes.destroy',
         'description' =>  'Elimina del sistema un almacen',
         ]);
+
+/*-------------------------------------------------------------------------------*/
+                  /* Permisos de productos */
+        //permiso para ver en la ruta index de todos los productos
+        Permission::create([
+        'name'        =>  'Ver productos',
+        'slug'        =>  'productos.index',
+        'description' =>  'Lista y navega todos los productos del sistema',
+        ]);
+
+        //permiso para ver en la ruta show donde solo hay un productos
+        Permission::create([
+        'name'        =>  'Ver detalles de un productos',
+        'slug'        =>  'productos.show',
+        'description' =>  'Muestra todos los detalles de un productos',
+        ]);
+
+        //permiso para crear un nuevo producto
+        Permission::create([
+        'name'        =>  'Creación de productos',
+        'slug'        =>  'productos.create',
+        'description' =>  'Permite crear un productos',
+        ]);
+
+        //permiso para actualizar un producto
+        Permission::create([
+        'name'        =>  'Edición de productos',
+        'slug'        =>  'productos.edit',
+        'description' =>  'Muestra y actualiza la informacion de un productos',
+        ]);
+
+        //permiso eliminar producto
+        Permission::create([
+        'name'        =>  'Eliminar productos',
+        'slug'        =>  'productos.destroy',
+        'description' =>  'Elimina del sistema un productos',
+        ]);
     }
 }

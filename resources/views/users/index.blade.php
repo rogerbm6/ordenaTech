@@ -53,53 +53,37 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
         <div class="card-header border-0">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">Clientes</h3>
+                    <h3 class="mb-0">Usuarios</h3>
                 </div>
-                @can('clientes.create')
-                <div class="col text-right d-inline p-1">
-                    <a type="button" class="btn btn-sm btn-primary m-1" href="{{route('clientes.create')}}">
-                        <i class="fa fa-plus-square"></i>
-                        Nuevo
-                    </a>
-
-                    @endcan
-
                 </div>
             </div>
-        </div>
+
         <div class="table-responsive">
             <!-- Projects table -->
             <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Tipo</th>
-                        <th scope="col">Telefono</th>
-                        <th scope="col">Dirección</th>
+                        <th scope="col">Email</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($clientes as $cliente)
+                    @foreach ($users as $user)
 
 
                     <tr>
                         <td scope="row">
-                            {{$cliente->nombre}}
+                            {{$user->name}}
                         </td>
                         <th>
-                            {{$cliente->tipo}}
+                            {{$user->email}}
                         </th>
-                        <th>
-                            {{$cliente->telefono}}
-                        </th>
+
                         <td>
-                            {{$cliente->direccion ? : 'No tiene'}}
-                        </td>
-                        <td>
-                          @can ('clientes.show')
-                            <a type="button" class="btn btn-sm btn-success" href="{{route('clientes.show', $cliente->id)}}">
+                          @can ('user.show')
+                            <a type="button" class="btn btn-sm btn-success" href="{{route('user.show', $user->id)}}">
                                 <i class="fas fa-address-book fa-fw mr-2"></i>Ver
                             </a>
                           @endcan

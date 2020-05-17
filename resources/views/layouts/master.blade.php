@@ -44,8 +44,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
     @include('partials.navbar')
 
     <div class="main-wrapper">
-
+      <div class="container-fluid mt-5">
         @yield('content')
+      </div>
+
 
 
 
