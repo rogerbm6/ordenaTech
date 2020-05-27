@@ -6,11 +6,22 @@ use Illuminate\Http\Request;
 use App\User;
 use Caffeinated\Shinobi\Models\Role;
 
+
+use Yajra\DataTables\Facades\DataTables;
+
 class UserController extends Controller
 {
   public function index()
   {
       $users = User::all();
+
+      if (request()->ajax()) {
+        return datatables()
+        ->eloquent(User::query())
+        ->addColumn('btn', 'users/actions')
+        ->rawColumns(['btn'])
+        ->toJson();
+      }
 
       return view('users/index', ['users'=>$users]);
   }
@@ -23,6 +34,15 @@ class UserController extends Controller
    */
   public function show(User $user)
   {
+
+    if (request()->ajax()) {
+      $roles= $user->roles;
+      return Datatables::of($roles)
+      ->addColumn('btn', 'users/actionshow')
+      ->rawColumns(['btn'])
+      ->make(true);
+    }
+
       return view('users/show', ['user'=>$user]);
   }
 
@@ -30,7 +50,7 @@ class UserController extends Controller
   public function edit(User $user)
   {
       $roles=Role::all();
-      
+
       return view('users/edit', ['user'=>$user, 'roles'=>$roles]);
   }
 

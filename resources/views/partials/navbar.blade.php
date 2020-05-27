@@ -15,8 +15,8 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
-<header class="header text-center">
-    <h1 class="blog-name pt-lg-4 mb-0"><a href="/home">{{config('app.name', 'Laravel')}}</a></h1>
+<header class="header text-center bg-dark">
+    <h1 class="blog-name pt-lg-4 mb-0 text-uppercase"><a href="/home">{{config('app.name', 'Laravel')}}</a></h1>
 
     <nav class="navbar navbar-expand-lg navbar-dark">
 
@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 
         <div id="navigation" class="collapse navbar-collapse flex-column">
             <div class="profile-section pt-3 pt-lg-0">
-                <img class="profile-image mb-3 rounded-circle mx-auto" href='/home' src="{{asset('img/logo2.png')}}" alt="image">
+                <img class="profile-image mb-3 img-thumbnail mx-auto" href='/home' src="{{asset('img/logo2.png')}}" alt="image">
 
                 <hr>
             </div>
@@ -41,7 +41,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                       <a class="nav-link" href="{{route('clientes.index')}}"><i class="fas fa-users fa-fw mr-2"></i>Clientes</a>
                   </li>
                 @endcan
-                @can('producto.index')
+                @can('productos.index')
                 <li class="nav-item {{ Request::is('producto') ? 'active' : ''}}">
                     <a class="nav-link" href="{{route('producto.index')}}"><i class="fa fa-cube fa-fw mr-2"></i>Productos</a>
                 </li>
@@ -55,6 +55,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                 @can('user.index')
                 <li class="nav-item {{ Request::is('user') ? 'active' : ''}}">
                     <a class="nav-link" href="{{route('user.index')}}"><i class="fas fa-users-cog fa-fw mr-2"></i></i>Usuarios</a>
+                </li>
+                @endcan
+
+                @can('roles.index')
+                <li class="nav-item {{ Request::is('roles') ? 'active' : ''}}">
+                    <a class="nav-link" href="{{route('roles.index')}}"><i class="fas fa-user-tag fa-fw mr-2"></i></i>Roles</a>
                 </li>
                 @endcan
 

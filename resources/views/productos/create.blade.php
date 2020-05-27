@@ -19,6 +19,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 
 @section('content')
 
+  @if ($errors->any())
+  <div class="row justify-content-center">
+      <div class="col-sm-12">
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach($errors->all() as $error)
+                      <li>{{$error}}</li>
+                      @endforeach
+              </ul>
+          </div>
+      </div>
+  </div>
+  @endif
+
 <div class="row" style="margin-top:40px">
     <div class="offset-md-2 col-md-8">
         <div class="card">
@@ -32,22 +46,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                         <div class="col-md-6">
                             <fieldset class="form-group">
                                 <label for="numero_serie">Numero de serie</label>
-                                <input type="text" class="form-control" id="numero_serie" name="numero_serie">
+                                <input type="text" class="form-control" id="numero_serie" name="numero_serie" value="{{old('numero_serie')}}">
                             </fieldset>
 
                             <fieldset class="form-group">
                                 <label for="nombre">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre">
+                                <input type="text" class="form-control" id="nombre" name="nombre" value="{{old('nombre')}}">
                             </fieldset>
 
                             <fieldset class="form-group">
                                 <label for="marca">Marca</label>
-                                <input type="text" id="marca" name="marca" class="form-control">
+                                <input type="text" id="marca" name="marca" class="form-control" value="{{old('marca')}}">
                             </fieldset>
 
                             <fieldset class="form-group">
                                 <label for="modelo">Modelo</label>
-                                <input type="text" id="modelo" name="modelo" class="form-control">
+                                <input type="text" id="modelo" name="modelo" class="form-control" value="{{old('modelo')}}">
                             </fieldset>
                         </div>
                         <div class="col-md-6">
@@ -69,13 +83,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 
                             <fieldset class="form-group">
                                 <label for="cantidad">Cantidad</label>
-                                <input type="number" id="cantidad" name="cantidad" class="form-control">
+                                <input type="number" id="cantidad" name="cantidad" class="form-control" value="{{old('cantidad')}}">
                             </fieldset>
 
                             <fieldset class="form-group">
                                 <label for="almacen">Almacén</label>
                                 <select class="custom-select" name="almacen">
-                                    <option selected>Escoge un Almacén</option>
+                                    <option selected value="{{old('almacen')}}">Escoge un Almacén</option>
                                     @foreach ($almacenes as $almacen)
                                     <option value="{{$almacen->id}}">{{$almacen->nombre}}</option>
                                     @endforeach
@@ -85,7 +99,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 
                             <fieldset class="form-group">
                                 <label for="ubicacion">Ubicación en el almacén</label>
-                                <input type="text" name="ubicacion" id="ubicacion" class="form-control">
+                                <input type="text" name="ubicacion" id="ubicacion" class="form-control" value="{{old('ubicacion')}}">
                             </fieldset>
                         </div>
                     </div>
@@ -95,7 +109,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 
                     <div class="form-group">
                         <label for="notas">Notas</label>
-                        <textarea class="form-control" id="notas" name="notas" rows="3"></textarea>
+                        <textarea class="form-control" id="notas" name="notas" rows="3">{{old('notas')}}</textarea>
                     </div>
 
                     <div class="form-group text-center">

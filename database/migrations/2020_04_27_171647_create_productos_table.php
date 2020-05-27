@@ -22,7 +22,7 @@ class CreateProductosTable extends Migration
           $table->string('ubicacion',70);
           $table->enum('estado', ['usado', 'nuevo', 'averiado', 'doa']);
           $table->integer('cantidad');
-          $table->string('notas',300);
+          $table->string('notas',1000);
           //foranea de clientes
           $table->unsignedInteger('cliente_id');
           $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');

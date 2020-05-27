@@ -6,13 +6,29 @@ use Illuminate\Http\Request;
 use App\Cliente;
 use App\Almacene;
 use App\Producto;
-
+use App\Http\Requests\ProductoFormRequest;
 
 class ProductoController extends Controller
 {
     public function index()
     {
         $productos = Producto::all();
+
+        if (request()->ajax()) {
+          return datatables()
+          ->eloquent(Producto::query())
+          //columna cliente
+          ->addColumn('cliente', function ($producto) {
+            return $producto->cliente->nombre;
+          })
+          //columna almacen
+          ->addColumn('almacen', function ($producto) {
+            return $producto->almacene->nombre;
+          })
+          ->addColumn('btn', 'productos/actions')
+          ->rawColumns(['btn'])
+          ->toJson();
+        }
 
         return view('productos/index', ['productos'=>$productos]);
     }
@@ -46,7 +62,7 @@ class ProductoController extends Controller
         return view('productos/create', ['cliente'=>$cliente , 'almacenes'=>$almacenes]);
     }
 
-    public function store(Request $request, Cliente $cliente)
+    public function store(ProductoFormRequest $request, Cliente $cliente)
     {
         //crea producto
         $producto = new Producto();
@@ -70,7 +86,7 @@ class ProductoController extends Controller
         return view('productos/edit', ['producto'=>$producto, 'almacenes'=>$almacenes]);
     }
 
-    public function update(Producto $producto, Request $request)
+    public function update(Producto $producto, ProductoFormRequest $request)
     {
         if ($producto->almacene->id != $request->input('almacen')) {
             //quita el almacen que tiene
@@ -91,5 +107,6 @@ class ProductoController extends Controller
         return redirect()->action('ProductoController@index')->with('info', 'producto eliminado correctamente');
 
     }
+
 
 }

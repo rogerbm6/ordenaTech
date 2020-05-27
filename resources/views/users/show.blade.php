@@ -42,10 +42,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
       </div>
   </div>
   @endif
-  
+
 <div class="row">
     <div class="col-sm-8">
-        <div class="container">
+        <div class="container text-light">
 
             <h1>{{$user->name}}</h1>
 
@@ -98,9 +98,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                 </div>
             </div>
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive p-3">
             <!-- Projects table -->
-            <table class="table align-items-center table-flush">
+            <table class="table align-items-center table-flush" id="tabla">
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">Nombre</th>
@@ -109,35 +109,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                         <th scope="col"></th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach ($user->roles as $rol)
 
-
-                    <tr>
-                        <th scope="row">
-                            {{$rol->name}}
-                        </th>
-
-                        <td>
-                            {{$rol->slug}}
-                        </td>
-
-                        <td>
-                            {{$rol->description}}
-                        </td>
-
-                        <td>
-                            @can ('producto.show')
-
-                            <a type="button" class="btn btn-sm btn-success" href="{{--route('producto.show', $producto->id)--}}">
-                                <i class="fas fa-address-book fa-fw mr-2"></i>Ir
-                            </a>
-                            @endcan
-                        </td>
-
-                    </tr>
-                    @endforeach
-                </tbody>
             </table>
         </div>
     </div>

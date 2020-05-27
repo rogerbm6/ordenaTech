@@ -24,20 +24,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 
 <div class="col-md-11 m-2 p-2">
 
-    @if ($errors->any())
-    <div class="row justify-content-center">
-        <div class="col-sm-12">
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{$error}}</li>
-                        @endforeach
-                </ul>
-            </div>
-        </div>
-    </div>
-    @endif
-
     @if (session('info'))
     <div class="row justify-content-center">
         <div class="col-sm-12">
@@ -84,10 +70,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                         <p class="h5"> {{$producto->notas}}</p>
                     </div>
                 </div>
-                @can ('producto.edit')
+                @can ('productos.edit')
                   <a type="button" href="{{route('producto.edit',$producto->id)}}" class="btn btn-warning"><i class="fas fa-user-edit"></i> Editar</a>
                 @endcan
-                @can ('producto.destroy')
+                @can ('productos.destroy')
                   <form action="{{route('producto.destroy',$producto->id)}}" method="POST" style="display:inline">
                       {{ method_field('DELETE') }}
                       {!! csrf_field() !!}

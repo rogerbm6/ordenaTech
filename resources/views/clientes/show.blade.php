@@ -19,10 +19,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 
 @section('content')
 
+@if (session('info'))
+<div class="row justify-content-center">
+    <div class="col-sm-12">
+        <div class="alert alert-success">
+            {{session('info')}}
+        </div>
+    </div>
+</div>
+@endif
 
 <div class="row">
     <div class="col-sm-8">
-        <div class="container">
+        <div class="container text-light">
 
             <h1>{{$cliente->nombre}}</h1>
 
@@ -49,7 +58,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
             @endcan
         </div>
     </div>
+    @can ('productos.index')
+      <div class="col-sm-2 ml-4">
+          <a type="button" href="{{route('clientes.pdf',$cliente->id)}}" class="btn btn-success"><i class="fas fa-file-pdf"></i> Exportar PDF</a>
 
+      </div>
+    @endcan
 </div>
 
 
@@ -77,20 +91,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                 <div class="col">
                     <h3 class="mb-0">Productos</h3>
                 </div>
-                @can('clientes.create')
+
                 <div class="col text-right d-inline p-1">
+                    @can('productos.create')
                     <a type="button" class="btn btn-sm btn-primary m-1" href="{{route('producto.create',$cliente->id)}}">
                         <i class="fa fa-plus-square"></i>
                         Agregar productos al cliente
                     </a>
-
+                    @endcan
                 </div>
-                @endcan
+
             </div>
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive p-3">
             <!-- Projects table -->
-            <table class="table align-items-center table-flush">
+            <table class="table align-items-center table-flush" id='tabla'>
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">Numero de serie</th>
@@ -101,38 +116,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                         <th scope="col"></th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach ($cliente->productos as $producto)
 
-
-                    <tr>
-                        <th scope="row">
-                            {{$producto->numero_serie}}
-                        </th>
-                        <td>
-                            {{$producto->nombre}}
-                        </td>
-                        <td>
-                            {{$producto->marca}}
-                        </td>
-                        <td>
-                            {{$producto->modelo}}
-                        </td>
-                        <th>
-                            {{$producto->almacene->nombre}}
-                        </th>
-                        <td>
-                            @can ('producto.show')
-
-                            <a type="button" class="btn btn-sm btn-success" href="{{route('producto.show', $producto->id)}}">
-                                <i class="fas fa-address-book fa-fw mr-2"></i>Ir
-                            </a>
-                            @endcan
-                        </td>
-
-                    </tr>
-                    @endforeach
-                </tbody>
             </table>
         </div>
     </div>

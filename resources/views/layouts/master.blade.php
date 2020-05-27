@@ -22,31 +22,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Inventario') }}</title>
 
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{{asset('css/theme-5.css')}}">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-
-
-    <!-- FontAwesome JS-->
-    <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" />
 
 
 
 </head>
 
-<body>
+<body class="fondo">
     {{-- barra de navegación --}}
     @include('partials.navbar')
 
     <div class="main-wrapper">
-      <div class="container-fluid mt-5">
-        @yield('content')
-      </div>
+        <div class="container-fluid mt-5">
+            @yield('content')
+        </div>
 
 
 
@@ -55,10 +50,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
         @include('partials.footer')
     </div>
 
-    <!-- Javascript -->
-    <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
-    <script src="{{asset('js/popper.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+
+    @include('partials.tables')
+
+
+    <!-- FontAwesome JS-->
+    <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
 
 </body>
 

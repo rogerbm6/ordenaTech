@@ -55,8 +55,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                 <div class="col">
                     <h3 class="mb-0">Clientes</h3>
                 </div>
-                @can('clientes.create')
+
                 <div class="col text-right d-inline p-1">
+                    @can('clientes.create')
                     <a type="button" class="btn btn-sm btn-primary m-1" href="{{route('clientes.create')}}">
                         <i class="fa fa-plus-square"></i>
                         Nuevo
@@ -67,48 +68,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                 </div>
             </div>
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive p-3">
             <!-- Projects table -->
-            <table class="table align-items-center table-flush">
+            <table class="table align-items-center table-flush" id="tabla">
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Tipo</th>
                         <th scope="col">Telefono</th>
                         <th scope="col">Dirección</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
+                        <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach ($clientes as $cliente)
 
-
-                    <tr>
-                        <td scope="row">
-                            {{$cliente->nombre}}
-                        </td>
-                        <th>
-                            {{$cliente->tipo}}
-                        </th>
-                        <th>
-                            {{$cliente->telefono}}
-                        </th>
-                        <td>
-                            {{$cliente->direccion ? : 'No tiene'}}
-                        </td>
-                        <td>
-                          @can ('clientes.show')
-                            <a type="button" class="btn btn-sm btn-success" href="{{route('clientes.show', $cliente->id)}}">
-                                <i class="fas fa-address-book fa-fw mr-2"></i>Ver
-                            </a>
-                          @endcan
-
-                        </td>
-
-                    </tr>
-                    @endforeach
-                </tbody>
             </table>
         </div>
     </div>

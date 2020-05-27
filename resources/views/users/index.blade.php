@@ -58,41 +58,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                 </div>
             </div>
 
-        <div class="table-responsive">
+        <div class="table-responsive p-3">
             <!-- Projects table -->
-            <table class="table align-items-center table-flush">
+            <table class="table align-items-center table-flush" id="tabla">
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Email</th>
                         <th scope="col"></th>
-                        <th scope="col"></th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach ($users as $user)
 
-
-                    <tr>
-                        <td scope="row">
-                            {{$user->name}}
-                        </td>
-                        <th>
-                            {{$user->email}}
-                        </th>
-
-                        <td>
-                          @can ('user.show')
-                            <a type="button" class="btn btn-sm btn-success" href="{{route('user.show', $user->id)}}">
-                                <i class="fas fa-address-book fa-fw mr-2"></i>Ver
-                            </a>
-                          @endcan
-
-                        </td>
-
-                    </tr>
-                    @endforeach
-                </tbody>
             </table>
         </div>
     </div>

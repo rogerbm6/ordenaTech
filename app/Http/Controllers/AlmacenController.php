@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Almacene;
 
+use Yajra\DataTables\Facades\DataTables;
+
 class AlmacenController extends Controller
 {
   public function index()
@@ -22,9 +24,18 @@ class AlmacenController extends Controller
    */
   public function show(Almacene $almacen)
   {
-      $productos=$almacen->productos;
+      if (request()->ajax()) {
+        $productos= $almacen->productos;
+        return Datatables::of($productos)
+        ->addColumn('cliente', function ($producto) {
+          return $producto->cliente->nombre;
+        })
+        ->addColumn('btn', 'almacenes/actionshow')
+        ->rawColumns(['btn'])
+        ->make(true);
+      }
 
-      return view('almacenes/show', ['almacen'=>$almacen, 'productos'=>$productos]);
+      return view('almacenes/show', ['almacen'=>$almacen]);
   }
 
   public function create()

@@ -40,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
       Route::put('roles/{rol}', 'RoleController@update')->name('roles.update')
             ->middleware('permission:roles.edit');
     //formulario de actualizar
-      Route::post('roles/{rol}/edit', 'RoleController@edit')->name('roles.edit')
+      Route::get('roles/{rol}/edit', 'RoleController@edit')->name('roles.edit')
             ->middleware('permission:roles.edit');
     //Elimina un rol
       Route::delete('roles/{rol}', 'RoleController@destroy')->name('roles.destroy')
@@ -49,28 +49,28 @@ Route::middleware(['auth'])->group(function () {
     /*-------------------Productos------------------*/
     //crear producto (post)
       Route::post('producto/{cliente}/store', 'ProductoController@store')->name('producto.store')
-            ->middleware('permission:producto.create');
+            ->middleware('permission:productos.create');
     //Envía a clientes para agregar producto
       Route::get('producto/redirect', 'ProductoController@redirect')->name('producto.redirect')
-            ->middleware('permission:producto.create');
+            ->middleware('permission:productos.create');
     //Crea producto (get)
       Route::get('producto/{cliente}/create', 'ProductoController@create')->name('producto.create')
-            ->middleware('permission:producto.create');
+            ->middleware('permission:productos.create');
     //Muesta productos
       Route::get('producto', 'ProductoController@index')->name('producto.index')
-            ->middleware('permission:producto.index');
+            ->middleware('permission:productos.index');
     //muestra un producto
       Route::get('producto/{producto}', 'ProductoController@show')->name('producto.show')
-            ->middleware('permission:producto.show');
+            ->middleware('permission:productos.show');
     //actualiza un producto
       Route::put('producto/{producto}', 'ProductoController@update')->name('producto.update')
-            ->middleware('permission:producto.edit');
+            ->middleware('permission:productos.edit');
     //formulario de actualizar
       Route::get('producto/{producto}/edit', 'ProductoController@edit')->name('producto.edit')
-            ->middleware('permission:producto.edit');
+            ->middleware('permission:productos.edit');
     //Elimina un producto
       Route::delete('producto/{producto}', 'ProductoController@destroy')->name('producto.destroy')
-            ->middleware('permission:producto.destroy');
+            ->middleware('permission:productos.destroy');
 
     /*-------------------Almacenes------------------*/
     //crear almacen (post)
@@ -117,6 +117,10 @@ Route::middleware(['auth'])->group(function () {
     //Elimina un producto
       Route::delete('cliente/{cliente}', 'ClienteController@destroy')->name('clientes.destroy')
             ->middleware('permission:clientes.destroy');
+
+    //Descarga pdf de cliente
+      Route::get('cliente/pdf/{cliente}', 'ClienteController@exportPdf')->name('clientes.pdf')
+                    ->middleware('permission:clientes.index');
 
     /*-------------------Usuarios------------------*/
     //Muesta user

@@ -18,6 +18,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 @extends('layouts.master')
 
 @section('content')
+@if ($errors->any())
+<div class="row justify-content-center">
+    <div class="col-sm-12">
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                    @endforeach
+            </ul>
+        </div>
+    </div>
+</div>
+@endif
 
 <div class="row" style="margin-top:40px">
     <div class="offset-md-3 col-md-6">
@@ -30,23 +43,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                     @csrf
                     <fieldset class="form-group">
                         <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" >
+                        <input type="text" class="form-control" id="nombre" name="nombre" value={{old('nombre')}}>
                     </fieldset>
 
                     <fieldset class="form-group">
                         <label for="telefono">Telefono</label>
-                        <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" id="telefono" name="telefono" class="form-control" >
+                        <input type="tel" id="telefono" name="telefono" class="form-control" value={{old('telefono')}}>
                     </fieldset>
 
                     <fieldset class="form-group">
                         <label for="direccion">Dirección</label>
-                        <input type="text" name="direccion" id="direccion" class="form-control">
+                        <input type="text" name="direccion" id="direccion" class="form-control" value={{old('direccion')}}>
                     </fieldset>
 
                     <fieldset class="form-group">
-                      <label for="tipo">Tipo</label>
-                        <select class="custom-select" name="tipo" >
-                            <option selected>Escoge un Tipo</option>
+                        <label for="tipo">Tipo</label>
+                        <select class="custom-select" name="tipo">
+                            <option selected value="{{old('tipo')}}">{{old('tipo')?: 'Escoge un Tipo'}}</option>
 
                             <option value="particular">Particular</option>
 

@@ -44,8 +44,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                 <div class="col">
                     <h3 class="mb-0">Almacenes</h3>
                 </div>
-                @can('almacenes.create')
+
                 <div class="col text-right d-inline p-1">
+                  @can('almacenes.create')
                     <a type="button" class="btn btn-sm btn-primary m-1" href="{{route('almacenes.create')}}">
                         <i class="fa fa-plus-square"></i>
                         Nuevo Almacen
