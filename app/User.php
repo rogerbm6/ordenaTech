@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 
 use Caffeinated\Shinobi\Concerns\HasRolesAndPermissions;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, HasRolesAndPermissions;
 

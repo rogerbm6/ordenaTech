@@ -19,7 +19,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 
 @section('content')
 
-
+@if (session('info'))
+<div class="row justify-content-center">
+    <div class="col-sm-12">
+        <div class="alert alert-success">
+            {{session('info')}}
+        </div>
+    </div>
+</div>
+@endif
 <div class="row">
     <div class="col-sm-8">
         <div class="container text-light">
@@ -75,7 +83,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
         <div class="card-header border-0">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">Productos</h3>
+                    <h3 class="mb-0">{{$almacen->productos->count()}} Productos</h3>
                 </div>
                 @can('producto.create')
                 <div class="col text-right d-inline p-1">
@@ -83,10 +91,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                         <i class="fa fa-plus-square"></i>
                         Agregar producto al almacen
                     </a>
-
-                @endcan
-
                 </div>
+                @endcan
             </div>
         </div>
         <div class="table-responsive p-3">

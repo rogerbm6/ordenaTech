@@ -19,6 +19,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 
 @section('content')
 
+  @if ($errors->any())
+  <div class="row justify-content-center">
+      <div class="col-sm-12">
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach($errors->all() as $error)
+                      <li>{{$error}}</li>
+                      @endforeach
+              </ul>
+          </div>
+      </div>
+  </div>
+  @endif
+
 <div class="row" style="margin-top:40px">
     <div class="offset-md-2 col-md-8">
         <div class="card">
@@ -31,17 +45,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 
                     <fieldset class="form-group">
                         <label for="name">Nombre</label>
-                        <input type="text" class="form-control" id="name" name="name">
+                        <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}">
                     </fieldset>
 
                     <fieldset class="form-group">
                         <label for="slug">URL amigable</label>
-                        <input type="text" class="form-control" id="slug" name="slug">
+                        <input type="text" class="form-control" id="slug" name="slug" value="{{old('slug')}}">
                     </fieldset>
 
                     <div class="form-group">
                         <label for="description">Descripción</label>
-                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                        <textarea class="form-control" id="description" name="description" rows="3">{{old('description')}}</textarea>
                     </div>
 
 

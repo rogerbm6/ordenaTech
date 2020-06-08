@@ -25,20 +25,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 
 <div class="col-md-11 m-2 p-2">
 
-    @if ($errors->any())
-    <div class="row justify-content-center">
-        <div class="col-sm-12">
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{$error}}</li>
-                        @endforeach
-                </ul>
-            </div>
-        </div>
-    </div>
-    @endif
-
     @if (session('info'))
     <div class="row justify-content-center">
         <div class="col-sm-12">

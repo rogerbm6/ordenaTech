@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\UserFormRequest;
 use App\User;
 use Caffeinated\Shinobi\Models\Role;
 
@@ -56,7 +56,7 @@ class UserController extends Controller
 
 
 
-  public function update(User $user, Request $request)
+  public function update(User $user, UserFormRequest $request)
   {
       //Actualiza el usuario
       $user->update($request->all());

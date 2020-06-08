@@ -67,8 +67,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                         <div class="col-md-6">
                             <fieldset class="form-group">
                                 <label for="estado">Estado</label>
-                                <select class="custom-select" name="estado">
-                                    <option selected>Escoge un Estado</option>
+                                <select class="custom-select" name="estado" required>
 
                                     <option value="usado">Usado</option>
 

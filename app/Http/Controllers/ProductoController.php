@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Cliente;
 use App\Almacene;
 use App\Producto;
+use App\User;
+use Caffeinated\Shinobi\Models\Role;
+use Mail;
 use App\Http\Requests\ProductoFormRequest;
 
 class ProductoController extends Controller
@@ -74,6 +76,27 @@ class ProductoController extends Controller
         $producto->fill($request->all());
         //guarda
         $producto->save();
+
+        //si hay menos de 3 envia un email a los administradores
+        if ($producto->cantidad <= 3 && $producto->cliente->tipo == 'empresa') {
+
+          $usuarios=User::whereHas('roles', function ($q) {
+            $q->where('name', 'Admin');
+          })->get();
+
+          foreach ($usuarios as $usuario) {
+            $info = ['usuario' => $usuario, 'producto' => $producto];
+
+            Mail::send('mail', $info, function ($message) use($usuario){
+
+                $message->to($usuario->email, $usuario->name)->subject('FELIZ CUMPLEAÑOS!!!');
+                $message->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            });
+          }
+
+
+        }
+
         //redirige a show
         return redirect()->action('ProductoController@show', ['producto'=>$producto])->with('info', 'producto agregado correctamente');
     }
@@ -95,6 +118,27 @@ class ProductoController extends Controller
             $producto->almacene()->associate(Almacene::find($request->input('almacen')));
         }
         $producto->update($request->all());
+
+        //si hay menos de 3 envia un email a los administradores
+        if ($producto->cantidad <= 3 && $producto->cliente->tipo == 'empresa') {
+
+          $usuarios=User::whereHas('roles', function ($q) {
+            $q->where('name', 'Admin');
+          })->get();
+
+          foreach ($usuarios as $usuario) {
+            $info = ['usuario' => $usuario, 'producto' => $producto];
+
+            Mail::send('mail', $info, function ($message) use($usuario){
+
+                $message->to($usuario->email, $usuario->name)->subject('Administración OrdenaTech');
+                $message->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            });
+          }
+
+
+        }
+
 
         return redirect()->action('ProductoController@show', ['producto'=>$producto])->with('info', 'producto actualizado correctamente');
 

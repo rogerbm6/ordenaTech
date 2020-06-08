@@ -17,11 +17,11 @@ Route::get('/', function () {
 });
 
 
-Auth::routes();
+Auth::routes(['verify' => 'true']);
 
 
 //rutas con Autenticación
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','verified'])->group(function () {
   Route::get('/home', 'HomeController@index')->name('home');
     /*-------------------Roles------------------*/
     //crear rol (post)

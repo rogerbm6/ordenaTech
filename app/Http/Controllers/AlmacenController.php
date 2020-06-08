@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\AlmaceneFormRequest;
 use App\Almacene;
 
 use Yajra\DataTables\Facades\DataTables;
@@ -43,7 +43,7 @@ class AlmacenController extends Controller
       return view('almacenes/create');
   }
 
-  public function store(Request $request)
+  public function store(AlmaceneFormRequest $request)
   {
       $almacen = Almacene::create($request->all());
 
@@ -55,7 +55,7 @@ class AlmacenController extends Controller
       return view('almacenes/edit', ['almacen'=>$almacen]);
   }
 
-  public function update(Almacene $almacen, Request $request)
+  public function update(Almacene $almacen, AlmaceneFormRequest $request)
   {
       $almacen->update($request->all());
 

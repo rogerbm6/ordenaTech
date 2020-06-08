@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
+use App\Http\Requests\RolFormRequest;
 
 use Caffeinated\Shinobi\Models\Role;
 use Caffeinated\Shinobi\Models\Permission;
@@ -44,7 +45,7 @@ class RoleController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request)
+  public function store(RolFormRequest $request)
   {
       $rol = Role::create($request->all());
 
@@ -75,7 +76,7 @@ class RoleController extends Controller
 
 
 
-  public function update(Role $rol, Request $request)
+  public function update(Role $rol, RolFormRequest $request)
   {
       //Actualiza el rol
       $rol->update($request->all());

@@ -19,25 +19,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 
 @section('content')
 
+  @if (session('info'))
+  <div class="row justify-content-center">
+      <div class="col-sm-12">
+          <div class="alert alert-success">
+              {{session('info')}}
+          </div>
+      </div>
+  </div>
+  @endif
+
 <a type="button" href="/home" class="btn btn-sm btn-info m-1">
     <i class="fas fa-angle-left"></i> volver
 </a>
 
 <div class="col-md-11 m-2 p-2">
 
-    @if ($errors->any())
-    <div class="row justify-content-center">
-        <div class="col-sm-12">
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{$error}}</li>
-                        @endforeach
-                </ul>
-            </div>
-        </div>
-    </div>
-    @endif
     <div class="card mb-5">
         <div class="card-header border-0">
             <div class="row align-items-center">

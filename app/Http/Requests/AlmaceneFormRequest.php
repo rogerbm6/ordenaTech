@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductoFormRequest extends FormRequest
+class AlmaceneFormRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -26,15 +26,10 @@ class ProductoFormRequest extends FormRequest
   {
       return
       [
-        'nombre'            => 'required|max:45|min:4',
-        'marca'             => 'required|max:12|min:4',
-        'modelo'            => 'required|max:35|min:4',
-        'numero_serie'      => 'required|max:12|min:4',
-        'ubicacion'         => 'required|max:70|min:7',
-        'estado'            => 'required',
-        'cantidad'          => 'required|int|min:1',
-        'notas'             => 'required|max:1000',
-        'almacen'           => 'required|int',
+        'nombre'            => 'required|max:32|min:4',
+        'direccion'         => 'required|max:45|min:4',
+        'cp'                => 'required|max:12|min:1|int',
+        'isla'              => 'required|max:25|min:4',
       ];
   }
 
@@ -50,7 +45,8 @@ class ProductoFormRequest extends FormRequest
           'required'        => 'Es necesario rellenar el campo :attribute',
           'max'             => 'El campo :attribute tiene como maximo :max caracteres',
           'min'             => 'El campo :attribute tiene como minimo :min caracteres',
-          'cantidad.min'    => 'El campo :attribute tiene como minimo :min',
+          'cp.min'          => 'El campo :attribute tiene como minimo :min',
+          'cp.max'          => 'El campo :attribute tiene como maximo :max',
           'int'             => 'El campo :attribute debe ser entero',
       ];
   }

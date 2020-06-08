@@ -19,6 +19,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 
 @section('content')
 
+  @if ($errors->any())
+  <div class="row justify-content-center">
+      <div class="col-sm-12">
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach($errors->all() as $error)
+                      <li>{{$error}}</li>
+                      @endforeach
+              </ul>
+          </div>
+      </div>
+  </div>
+  @endif
+
 <div class="row" style="margin-top:40px">
     <div class="offset-md-2 col-md-8">
         <div class="card">
