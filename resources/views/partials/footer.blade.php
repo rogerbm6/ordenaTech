@@ -17,6 +17,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 <footer class="footer text-center py-2 theme-bg-dark fixed-bottom">
 
-  <small class="copyright">Diseñado por <a href="mailto:roggerbm6@gmail.com" target="_blank">Roger Berrío Mira</a> para OrdenaTech</small>
+    <small class="copyright">Diseñado por <a href="mailto:roggerbm6@gmail.com" target="_blank">Roger Berrío Mira</a> para OrdenaTech con
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Licencia de Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></small>
+
 
 </footer>

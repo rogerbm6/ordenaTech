@@ -28,7 +28,7 @@ class RolFormRequest extends FormRequest
       [
         'name'              => 'required|max:32|min:4',
         'slug'              => 'required|max:32|min:4',
-        'description'       => 'required|max:45|min:4',
+        'description'       => 'required|max:1000',
       ];
   }
 
