@@ -34,7 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
         <div class="container text-light">
 
             <h1>{{$cliente->nombre}}</h1>
-
+            <h5>{{$cliente->email}}</h5>
             <p><span class="font-weight-bold">Telefono:</span> {{$cliente->telefono}}</p>
             <p><span class="font-weight-bold">Tipo:</span> {{$cliente->tipo}}</p>
 

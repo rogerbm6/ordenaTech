@@ -142,3 +142,4 @@ Route::middleware(['auth','verified'])->group(function () {
 
       Route::get('logout', 'Auth\LoginController@logout');
 });
+

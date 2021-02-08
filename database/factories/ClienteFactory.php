@@ -10,6 +10,7 @@ $factory->define(Cliente::class, function (Faker $faker) {
     [
         'nombre'    =>$faker->name,
         'telefono'  =>$faker->phoneNumber,
+        'email'     =>$faker->unique()->safeEmail,
         'tipo'      =>$faker->randomElement(['empresa', 'particular']),
     ];
 });

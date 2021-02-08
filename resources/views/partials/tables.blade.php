@@ -12,6 +12,9 @@
                     data: 'tipo'
                 },
                 {
+                    data: 'email'
+                },
+                {
                     data: 'telefono'
                 },
                 {

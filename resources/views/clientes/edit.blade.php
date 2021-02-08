@@ -49,6 +49,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                     </fieldset>
 
                     <fieldset class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" value="{{$cliente->email}}">
+                    </fieldset>
+
+                    <fieldset class="form-group">
                         <label for="telefono">Telefono</label>
                         <input type="tel" id="telefono" name="telefono" class="form-control" value="{{$cliente->telefono}}">
                     </fieldset>

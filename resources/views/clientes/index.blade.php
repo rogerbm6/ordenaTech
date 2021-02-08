@@ -75,6 +75,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Tipo</th>
+                        <th scope="col">Email</th>
                         <th scope="col">Telefono</th>
                         <th scope="col">Dirección</th>
                         <th></th>
