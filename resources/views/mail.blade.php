@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>AD3D GEO-INGENIERÍA</title>
+    <title>ORDENATECH</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -84,7 +84,7 @@
         <div class="m-2">
 
             <p class="font-weight-bold">Producto {{$producto->nombre}} en cantidad minima </p>
-            <p> Datos del cliente: <br>Nombre: {{$producto->cliente->nombre}} <br>Telefono: {{$producto->cliente->telefono}}<br>Tipo: {{$producto->cliente->tipo}}<br>Dirección: {{$producto->cliente->direccion ?: 'No tiene'}}</p>
+            <p> Datos del cliente: <br>Nombre: {{$producto->cliente->nombre}}<br>Email: {{$producto->cliente->email}}<br>Telefono: {{$producto->cliente->telefono}}<br>Tipo: {{$producto->cliente->tipo}}<br>Dirección: {{$producto->cliente->direccion ?: 'No tiene'}}</p>
             <p>Fecha: {{date("d-m-Y")}}</p>
         </div>
 
