@@ -56,6 +56,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                         <p class="card-text"><span class="font-weight-bold">Marca:</span> {{$producto->marca}}</p>
                     </div>
                     <div class="col-sm-12 col-md-5 p-2">
+                        <p class="card-text"><span class="font-weight-bold">Incidencia:</span> {{$producto->incidencia}}</p>
+
                         <p class="card-text"><span class="font-weight-bold">Modelo:</span> {{$producto->modelo}}</p>
 
                         <p class="card-text"><span class="font-weight-bold">Estado:</span> {{$producto->estado}}</p>

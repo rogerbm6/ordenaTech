@@ -60,6 +60,9 @@
                     data: 'part_number'
                 },
                 {
+                    data: 'incidencia'
+                },
+                {
                     data: 'modelo'
                 },
                 {
@@ -112,6 +115,9 @@
                 },
                 {
                     data: 'part_number'
+                },
+                {
+                    data: 'incidencia'
                 },
                 {
                     data: 'modelo'

@@ -73,6 +73,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                     <tr>
                         <th scope="col">S/N</th>
                         <th scope="col">P/N</th>
+                        <th scope="col">Incidencia</th>
                         <th scope="col">Modelo</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Marca</th>

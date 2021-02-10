@@ -71,6 +71,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                         </div>
                         <div class="col-md-6">
                             <fieldset class="form-group">
+
+                                <fieldset class="form-group">
+                                    <label for="incidencia">Incidencia</label>
+                                    <input type="text" id="incidencia" name="incidencia" class="form-control" value="{{old('incidencia')}}">
+                                </fieldset>
+
                                 <label for="estado">Estado</label>
                                 <select class="custom-select" name="estado" required>
 
@@ -105,15 +111,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 
                                 </select>
                             </fieldset>
-
-                            <fieldset class="form-group">
-                                <label for="ubicacion">Ubicación en el almacén</label>
-                                <input type="text" name="ubicacion" id="ubicacion" class="form-control" value="{{old('ubicacion')}}">
-                            </fieldset>
                         </div>
                     </div>
 
-
+                    <fieldset class="form-group">
+                        <label for="ubicacion">Ubicación en el almacén</label>
+                        <input type="text" name="ubicacion" id="ubicacion" class="form-control" value="{{old('ubicacion')}}">
+                    </fieldset>
 
 
                     <div class="form-group">

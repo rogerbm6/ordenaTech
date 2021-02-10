@@ -14,23 +14,24 @@ class CreateProductosTable extends Migration
     public function up()
     {
         Schema::create('productos', function (Blueprint $table) {
-          $table->increments('id');
-          $table->string('nombre',45);
-          $table->string('numero_serie',12);
-          $table->string('part_number',12);
-          $table->string('marca',12);
-          $table->string('modelo',35);
-          $table->string('ubicacion',70);
-          $table->enum('estado', ['usado', 'nuevo', 'averiado', 'doa']);
-          $table->integer('cantidad');
-          $table->integer('cantidad_minima');
-          $table->string('notas',1000);
-          //foranea de clientes
-          $table->unsignedInteger('cliente_id');
-          $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
-          //foranea de clientes
-          $table->unsignedInteger('almacene_id');
-          $table->timestamps();
+            $table->increments('id');
+            $table->string('nombre',45);
+            $table->string('numero_serie',12);
+            $table->string('part_number',12);
+            $table->string('incidencia',12);
+            $table->string('marca',12);
+            $table->string('modelo',35);
+            $table->string('ubicacion',70);
+            $table->enum('estado', ['usado', 'nuevo', 'averiado', 'doa']);
+            $table->integer('cantidad');
+            $table->integer('cantidad_minima');
+            $table->string('notas',1000);
+            //foranea de clientes
+            $table->unsignedInteger('cliente_id');
+            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
+            //foranea de clientes
+            $table->unsignedInteger('almacene_id');
+            $table->timestamps();
         });
     }
 
