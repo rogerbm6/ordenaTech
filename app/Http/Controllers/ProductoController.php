@@ -82,12 +82,12 @@ class ProductoController extends Controller
         //envio del email
         Mail::send('mail_new_product', $info, function ($message) use($producto){
           //envia email para el cliente
-          $message->to($producto->cliente->email, $producto->cliente->nombre)->subject('Administración OrdenaTech');
+            $message->cc($producto->cliente->email, $producto->cliente->nombre)->subject('Administración OrdenaTech');
           //envia email a administración
-          $message->to(config('app.admin.reply'), config('app.admin.user'));
+            $message->bcc(config('app.admin.reply'), config('app.admin.user'));
           //info del que envia
-          $message->from(config('app.admin.mail'), config('app.admin.user'));
-      });
+            $message->from(config('app.admin.mail'), config('app.admin.user'));
+        });
 
         //redirige a show
         return redirect()->action('ProductoController@show', ['producto'=>$producto])->with('info', 'producto agregado correctamente');
@@ -112,19 +112,18 @@ class ProductoController extends Controller
         $producto->update($request->all());
 
         //si hay menos de 3 envia un email a los administradores
-        if ($producto->cantidad <= 3 ) {
+        if ($producto->cantidad <= $producto->cantidad_minima ) {
           //variable usada en la vista blade 'mail'
             $info = ['producto' => $producto];
 
             Mail::send('mail', $info, function ($message) use($producto){
                 //envia email para el cliente
-                $message->to($producto->cliente->email, $producto->cliente->nombre)->subject('Administración OrdenaTech');
+                $message->cc($producto->cliente->email, $producto->cliente->nombre)->subject('Administración OrdenaTech');
                 //envia email a administración
-                $message->to(config('app.admin.reply'), config('app.admin.user'));
+                $message->bcc(config('app.admin.reply'), config('app.admin.user'));
                 //info del que envia
                 $message->from(config('app.admin.mail'), config('app.admin.user'));
             });
-          
         }
 
 

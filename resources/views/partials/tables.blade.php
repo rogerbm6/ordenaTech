@@ -57,6 +57,12 @@
                     data: "numero_serie"
                 },
                 {
+                    data: 'part_number'
+                },
+                {
+                    data: 'modelo'
+                },
+                {
                     data: 'nombre'
                 },
                 {
@@ -103,6 +109,12 @@
             "ajax": "{{route('producto.index')}}",
             "columns": [{
                     data: "numero_serie"
+                },
+                {
+                    data: 'part_number'
+                },
+                {
+                    data: 'modelo'
                 },
                 {
                     data: 'nombre'

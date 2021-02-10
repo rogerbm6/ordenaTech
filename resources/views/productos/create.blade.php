@@ -50,6 +50,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                             </fieldset>
 
                             <fieldset class="form-group">
+                                <label for="numero_serie">Part number</label>
+                                <input type="text" class="form-control" id="part_number" name="part_number" value="{{old('part_number')}}">
+                            </fieldset>
+
+                            <fieldset class="form-group">
                                 <label for="nombre">Nombre</label>
                                 <input type="text" class="form-control" id="nombre" name="nombre" value="{{old('nombre')}}">
                             </fieldset>
@@ -83,6 +88,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                             <fieldset class="form-group">
                                 <label for="cantidad">Cantidad</label>
                                 <input type="number" id="cantidad" name="cantidad" class="form-control" value="{{old('cantidad')}}">
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <label for="cantidad">Cantidad minima</label>
+                                <input type="number" id="cantidad_minima" name="cantidad_minima" class="form-control" value="{{old('cantidad_minima')}}">
                             </fieldset>
 
                             <fieldset class="form-group">

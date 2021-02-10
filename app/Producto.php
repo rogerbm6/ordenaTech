@@ -13,7 +13,7 @@ class Producto extends Model
    */
   protected $fillable =
   [
-      'nombre', 'numero_serie', 'marca', 'modelo', 'ubicacion', 'estado', 'cantidad', 'notas',
+      'nombre', 'numero_serie', 'part_number', 'cantidad_minima', 'marca', 'modelo', 'ubicacion', 'estado', 'cantidad', 'notas',
   ];
 
   public function cliente()

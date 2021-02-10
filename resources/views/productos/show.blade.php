@@ -49,6 +49,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                     <div class="col-sm-12 col-md-5 p-2">
                         <p class="card-text"><span class="font-weight-bold">S/N:</span> {{$producto->numero_serie}}</p>
 
+                        <p class="card-text"><span class="font-weight-bold">P/N:</span> {{$producto->part_number}}</p>
+
                         <p class="card-text"><span class="font-weight-bold">Nombre:</span> {{$producto->nombre}}</p>
 
                         <p class="card-text"><span class="font-weight-bold">Marca:</span> {{$producto->marca}}</p>
