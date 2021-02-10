@@ -77,25 +77,17 @@ class ProductoController extends Controller
         //guarda
         $producto->save();
 
-        //si hay menos de 3 envia un email a los administradores
-        if ($producto->cantidad <= 3 && $producto->cliente->tipo == 'empresa') {
-
-          $usuarios=User::whereHas('roles', function ($q) {
-            $q->where('name', 'Admin');
-          })->get();
-
-          foreach ($usuarios as $usuario) {
-            $info = ['usuario' => $usuario, 'producto' => $producto];
-
-            Mail::send('mail', $info, function ($message) use($usuario){
-
-                $message->to($usuario->email, $usuario->name)->subject('FELIZ CUMPLEAÑOS!!!');
-                $message->from(env('MAIL_USERNAME'), env('APP_NAME'));
-            });
-          }
-
-
-        }
+        //variable usada en la vista blade 'mail_new_product'
+        $info = ['producto' => $producto];
+        //envio del email
+        Mail::send('mail_new_product', $info, function ($message) use($producto){
+          //envia email para el cliente
+          $message->to($producto->cliente->email, $producto->cliente->nombre)->subject('Administración OrdenaTech');
+          //envia email a administración
+          $message->to(config('app.admin.reply'), config('app.admin.user'));
+          //info del que envia
+          $message->from(config('app.admin.mail'), config('app.admin.user'));
+      });
 
         //redirige a show
         return redirect()->action('ProductoController@show', ['producto'=>$producto])->with('info', 'producto agregado correctamente');
@@ -120,23 +112,19 @@ class ProductoController extends Controller
         $producto->update($request->all());
 
         //si hay menos de 3 envia un email a los administradores
-        if ($producto->cantidad <= 3 && $producto->cliente->tipo == 'empresa') {
+        if ($producto->cantidad <= 3 ) {
+          //variable usada en la vista blade 'mail'
+            $info = ['producto' => $producto];
 
-          $usuarios=User::whereHas('roles', function ($q) {
-            $q->where('name', 'Admin');
-          })->get();
-
-          foreach ($usuarios as $usuario) {
-            $info = ['usuario' => $usuario, 'producto' => $producto];
-
-            Mail::send('mail', $info, function ($message) use($usuario){
-
-                $message->to($usuario->email, $usuario->name)->subject('Administración OrdenaTech');
-                $message->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            Mail::send('mail', $info, function ($message) use($producto){
+                //envia email para el cliente
+                $message->to($producto->cliente->email, $producto->cliente->nombre)->subject('Administración OrdenaTech');
+                //envia email a administración
+                $message->to(config('app.admin.reply'), config('app.admin.user'));
+                //info del que envia
+                $message->from(config('app.admin.mail'), config('app.admin.user'));
             });
-          }
-
-
+          
         }
 
 

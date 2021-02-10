@@ -3,6 +3,19 @@
 return [
 
     /*
+    /--------------------------------------------------------------------------
+    / New enviroment variable for a constant mail 
+    /This value is a mail for send notifications automatic 
+    /
+    */
+
+    'admin' => [
+        'user' => env('APP_NAME'),
+        'mail' => 'roggerbm6@gmail.com',
+        'reply'=> 'yeraycorralejo@gmail.com'
+    ],
+
+    /*
     |--------------------------------------------------------------------------
     | Application Name
     |--------------------------------------------------------------------------

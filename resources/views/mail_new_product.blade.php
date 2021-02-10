@@ -77,13 +77,13 @@
     <hr>
     <div class="main">
         <p>Por favor, no responda a este mensaje, es un envío automático.</p>
-        <p class="font-weight-bold">Procedemos a enviarle este correo electronico para informarle <br> que uno de los productos del almacen {{$producto->almacene->nombre}} ha reducido su cantidad a {{$producto->cantidad}}</p>
+        <p class="font-weight-bold">Procedemos a enviarle este correo electronico para informarle <br> sobre la llegada del producto "{{$producto->nombre}}" al almacen  {{$producto->almacene->nombre}}, la cantidad de este es de {{$producto->cantidad}}</p>
 
         <br>
         <br>
         <div class="m-2">
 
-            <p class="font-weight-bold">Producto {{$producto->nombre}} en cantidad minima </p>
+            <p class="font-weight-bold">Producto {{$producto->nombre}}  </p>
             <p> Datos del cliente: <br>Nombre: {{$producto->cliente->nombre}}<br>Email: {{$producto->cliente->email}}<br>Telefono: {{$producto->cliente->telefono}}<br>Tipo: {{$producto->cliente->tipo}}<br>Dirección: {{$producto->cliente->direccion ?: 'No tiene'}}</p>
             <p>Fecha: {{date("d-m-Y")}}</p>
         </div>
