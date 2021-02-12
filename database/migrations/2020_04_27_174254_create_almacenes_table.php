@@ -14,12 +14,13 @@ class CreateAlmacenesTable extends Migration
     public function up()
     {
         Schema::create('almacenes', function (Blueprint $table) {
-          $table->increments('id');
-          $table->string('nombre',32);
-          $table->string('direccion',45);
-          $table->string('cp',12);
-          $table->string('isla',25);
-          $table->timestamps();
+            $table->increments('id');
+            $table->string('email')->unique();
+            $table->string('nombre',32);
+            $table->string('direccion',45);
+            $table->string('cp',12);
+            $table->string('isla',25);
+            $table->timestamps();
         });
     }
 

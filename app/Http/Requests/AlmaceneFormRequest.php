@@ -28,8 +28,9 @@ class AlmaceneFormRequest extends FormRequest
       [
         'nombre'            => 'required|max:32|min:4',
         'direccion'         => 'required|max:45|min:4',
-        'cp'                => 'required|max:12|min:1|int',
+        'cp'                => 'required|max:12',
         'isla'              => 'required|max:25|min:4',
+        'email'             => 'required|email',
       ];
   }
 

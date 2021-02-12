@@ -48,7 +48,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 
                     <fieldset class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" name="email" id="email" class="form-control">
+                        <input type="email" name="email" id="email" class="form-control" value={{old('email')}}>
                     </fieldset>
 
                     <fieldset class="form-group">

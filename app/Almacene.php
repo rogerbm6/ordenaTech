@@ -13,7 +13,7 @@ class Almacene extends Model
    */
   protected $fillable =
   [
-      'nombre', 'direccion', 'cp', 'isla',
+      'nombre', 'direccion', 'cp', 'isla', 'email',
   ];
 
   public function productos()

@@ -116,6 +116,19 @@ class ProductoController extends Controller
           //variable usada en la vista blade 'mail'
             $info = ['producto' => $producto];
 
+            if ($producto->cantidad == 0) {
+
+              Mail::send('mail_without_product', $info, function ($message) use($producto){
+                //envia email para el cliente
+                $message->cc($producto->cliente->email, $producto->cliente->nombre)->subject('Administración OrdenaTech');
+                //envia email a administración
+                $message->bcc(config('app.admin.reply'), config('app.admin.user'));
+                //info del que envia
+                $message->from(config('app.admin.mail'), config('app.admin.user'));
+
+                return redirect()->action('ProductoController@show', ['producto'=>$producto])->with('info', 'producto actualizado correctamente');
+              });
+            }
             Mail::send('mail', $info, function ($message) use($producto){
                 //envia email para el cliente
                 $message->cc($producto->cliente->email, $producto->cliente->nombre)->subject('Administración OrdenaTech');

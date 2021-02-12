@@ -12,7 +12,7 @@ return [
     'admin' => [
         'user' => env('APP_NAME'),
         'mail' => 'roggerbm6@gmail.com',
-        'reply'=> 'yeraycorralejo@gmail.com'
+        'reply'=> 'roggerbm6@gmail.com'
     ],
 
     /*

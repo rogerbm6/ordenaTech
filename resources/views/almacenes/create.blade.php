@@ -49,6 +49,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                     </fieldset>
 
                     <fieldset class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" value="{{old('email')}}">
+                    </fieldset>
+
+                    <fieldset class="form-group">
                         <label for="cp">Codigo postal</label>
                         <input type="text" id="cp" name="cp" class="form-control" value="{{old('cp')}}">
                     </fieldset>

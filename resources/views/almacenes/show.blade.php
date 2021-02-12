@@ -33,10 +33,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
         <div class="container text-light">
 
             <h1>{{$almacen->nombre}}</h1>
+            <h5>{{$almacen->email}}</h5>
 
             <p><span class="font-weight-bold">Direccion:</span> {{$almacen->direccion}}</p>
             <p><span class="font-weight-bold">Código postal:</span> {{$almacen->cp}}</p>
-
+            
             <p><span class="font-weight-bold">Isla:</span> {{$almacen->isla}}</p>
 
 

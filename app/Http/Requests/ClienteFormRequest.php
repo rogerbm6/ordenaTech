@@ -30,6 +30,7 @@ class ClienteFormRequest extends FormRequest
           'telefono'          => 'required|max:12|min:9',
           'direccion'         => 'required|max:60|min:9',
           'tipo'              => 'required',
+          'email'             => 'required|email',
         ];
     }
 
