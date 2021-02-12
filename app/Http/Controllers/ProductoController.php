@@ -9,6 +9,7 @@ use App\User;
 use Caffeinated\Shinobi\Models\Role;
 use Mail;
 use App\Http\Requests\ProductoFormRequest;
+use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
@@ -43,7 +44,8 @@ class ProductoController extends Controller
      */
     public function show(Producto $producto)
     {
-        return view('productos/show', ['producto'=>$producto]);
+        $almacenes= Almacene::all();
+        return view('productos/show', ['producto'=>$producto, 'almacenes'=>$almacenes]);
     }
 
     /**
@@ -181,5 +183,27 @@ class ProductoController extends Controller
 
     }
 
+    public function almacen(Producto $producto, Request $request)
+    {
+        //crea producto
+        $producto_cambio = $producto->replicate();
+        $producto_cambio->almacene()->dissociate($producto_cambio->almacene);
+        //asocia el cliente
+        $producto_cambio->cliente()->associate($producto->cliente);
+        //asocia el almacén sacado del formulario
+        $producto_cambio->almacene()->associate(Almacene::find($request->input('almacen')));
+        
+        //le agrega la cantidad enviada
+        $producto_cambio->cantidad = $request->input('cantidad');
+        //guarda
+        $producto_cambio->save();
+        //descuenta al producto original
+        $producto->cantidad -= $request->input('cantidad');
+        //guarda
+        $producto->save();
+
+        //redirige a show
+        return redirect()->action('ProductoController@show', ['producto'=>$producto])->with('info', 'almacen actualizado correctamente');
+    }
 
 }
