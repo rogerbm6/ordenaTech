@@ -174,13 +174,22 @@
                     data: "numero_serie"
                 },
                 {
+                    data: 'part_number'
+                },
+                {
+                    data: 'incidencia'
+                },
+                {
+                    data: 'modelo'
+                },
+                {
                     data: 'nombre'
                 },
                 {
                     data: 'marca'
                 },
                 {
-                    data: 'modelo'
+                    data: 'cantidad'
                 },
                 {
                     data: 'cliente'

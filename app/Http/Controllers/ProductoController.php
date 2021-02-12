@@ -111,7 +111,7 @@ class ProductoController extends Controller
             $producto->almacene()->dissociate($producto->almacene);
             //agrega el nuevo almacen
             $producto->almacene()->associate(Almacene::find($request->input('almacen')));
-            $producto->update($request->all());
+            
 
             //envia email a el almacen para que envien el producto al nuevo almacen
             $info = ['producto' => $producto, 'almacen_antiguo' => $almacen_antiguo];
@@ -138,7 +138,7 @@ class ProductoController extends Controller
             });
 
         }
-
+        $producto->update($request->all());
 
         //si hay menos de 3 envia un email a los administradores
         if ($producto->cantidad <= $producto->cantidad_minima ) {
