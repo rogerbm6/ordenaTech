@@ -104,12 +104,41 @@ class ProductoController extends Controller
     public function update(Producto $producto, ProductoFormRequest $request)
     {
         if ($producto->almacene->id != $request->input('almacen')) {
+            //almacen antiguo
+            $almacen_antiguo=$producto->almacene;
+
             //quita el almacen que tiene
             $producto->almacene()->dissociate($producto->almacene);
             //agrega el nuevo almacen
             $producto->almacene()->associate(Almacene::find($request->input('almacen')));
+            $producto->update($request->all());
+
+            //envia email a el almacen para que envien el producto al nuevo almacen
+            $info = ['producto' => $producto, 'almacen_antiguo' => $almacen_antiguo];
+
+            Mail::send('mail_change_almacen', $info, function ($message) use($almacen_antiguo){
+              //envia email para el cliente
+              $message->cc($almacen_antiguo->email, $almacen_antiguo->nombre)->subject('Administración OrdenaTech');
+              //envia email a administración
+              $message->bcc(config('app.admin.reply'), config('app.admin.user'));
+              //info del que envia
+              $message->from(config('app.admin.mail'), config('app.admin.user'));
+
+            });
+
+            //correo electronico al almacen donde se enviará el producto
+            Mail::send('mail_changed_almacen', $info, function ($message) use($producto){
+              //envia email para el cliente
+              $message->cc($producto->almacene->email, $producto->almacene->nombre)->subject('Administración OrdenaTech');
+              //envia email a administración
+              $message->bcc(config('app.admin.reply'), config('app.admin.user'));
+              //info del que envia
+              $message->from(config('app.admin.mail'), config('app.admin.user'));
+
+            });
+
         }
-        $producto->update($request->all());
+
 
         //si hay menos de 3 envia un email a los administradores
         if ($producto->cantidad <= $producto->cantidad_minima ) {
