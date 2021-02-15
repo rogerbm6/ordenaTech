@@ -29,6 +29,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
     </div>
     @endif
 
+    @if ($errors->any())
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                        @endforeach
+                </ul>
+            </div>
+        </div>
+    </div>
+    @endif
+
 </div>
 
 <div class="row">
@@ -148,33 +162,72 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                                                 name="cantidad"
                                                 class="form-control"
                                                 value="{{$producto->cantidad}}"></fieldset>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
-                                            Enviar
-                                        </button>
-                                    </div>
-                                </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-primary">
+                                                Enviar
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                         @endcan @can ('productos.destroy')
-                        <form
-                            action="{{route('producto.destroy',$producto->id)}}"
-                            method="POST"
-                            style="display:inline">
-                            {{ method_field('DELETE') }}
-                            {!! csrf_field() !!}
-                            <button type="submit" class="btn btn-danger" style="display:inline">
-                                <i class="fas fa-trash"></i>
-                                Borrar
-                            </button>
-                        </form>
+                        <button
+                            type="button"
+                            class="btn btn-danger"
+                            data-toggle="modal"
+                            data-target="#eliminar">
+                            <i class="fas fa-trash"></i>
+                            Eliminar
+                        </button>
+                        <!-- Modal -->
+                        <div
+                            class="modal fade"
+                            id="eliminar"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="eliminarLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="eliminarLabel">Eliminar</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+
+                                        <h5>¿Estás seguro de eliminar este producto?</h5>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <form
+                                            action="{{route('producto.destroy',$producto->id)}}"
+                                            method="POST"
+                                            style="display:inline">
+                                            {{ method_field('DELETE') }}
+                                            {!! csrf_field() !!}
+                                            <button type="submit" class="btn btn-danger" style="display:inline">
+                                                <i class="fas fa-trash"></i>
+                                                Borrar
+                                            </button>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                         @endcan
                     </div>
                 </div>
             </div>
+
             <div class="col-md-5 col-sm-7">
                 <div class="row mb-2">
                     @can ('clientes.index')

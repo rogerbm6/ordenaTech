@@ -65,8 +65,8 @@ Route::middleware(['auth','verified'])->group(function () {
     //actualiza un producto
       Route::put('producto/{producto}', 'ProductoController@update')->name('producto.update')
             ->middleware('permission:productos.edit');
-      //actualiza el almacen de un producto
-      Route::put('producto/{producto}', 'ProductoController@almacen')->name('producto.almacen')
+    //actualiza el almacen de un producto
+      Route::put('producto/{producto}/almacen', 'ProductoController@almacen')->name('producto.almacen')
             ->middleware('permission:productos.edit');
       //formulario de actualizar
       Route::get('producto/{producto}/edit', 'ProductoController@edit')->name('producto.edit')

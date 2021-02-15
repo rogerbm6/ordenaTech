@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>ORDENATECH</title>
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 12px;
+                color: #001028;
+            }
+
+            header {
+                position: fixed;
+                left: 0;
+                top: -130px;
+                right: 0;
+                height: 100px;
+                text-align: center;
+            }
+
+            header img {
+                margin: 10px 0;
+            }
+
+            header p {
+                margin: 0 0 500px;
+            }
+
+            main {
+                position: absolute;
+                left: 0;
+                top: 60px;
+                right: 0;
+                height: 100px;
+            }
+
+            footer {
+                position: fixed;
+                left: 0;
+                bottom: -50px;
+                right: 0;
+                height: 40px;
+            }
+
+            footer table {
+                width: 100%;
+            }
+
+            footer .centro {
+                text-align: center;
+            }
+
+            .logo {
+                height: 70px;
+            }
+
+            .gracias {
+                text-align: center;
+            }
+
+            .main {
+                text-align: center;
+            }
+        </style>
+
+        <body>
+            <header>
+
+                <img
+                    src="{{ $message->embed(public_path() . '/img/logo2.png') }}"
+                    alt="OrdenaTech"
+                    class="logo">
+
+            </header>
+            <h1 class="lead">
+                Cordial saludo,
+                {{$producto->almacene->nombre}}</h1>
+            <hr>
+            <div class="main">
+                <p>Por favor, no responda a este mensaje, es un envío automático.</p>
+                <p class="font-weight-bold">Procedemos a enviarle este correo electronico para informarle
+                    <br>
+                    sobre el cambio de almacen del producto "{{$producto->nombre}}" de "{{$producto->almacene->nombre}}"al  almacen<br>
+                    "{{$producto_cambio->almacene->nombre}}" en la<br> isla {{$producto_cambio->almacene->isla}} a la dirección <br>{{$producto_cambio->almacene->direccion}} con código<br> postal {{$producto->almacene->cp}}, la cantidad de este es de<br>
+                    {{$producto_cambio->cantidad}}, por favor envie el producto lo antes posible</p>
+                <br>
+                <br>
+                <h2 class="font-weight-bold">Cantidad a enviar: {{$producto_cambio->cantidad}}</h2>
+                <br>
+                <div class="m-2">
+
+                    <p class="font-weight-bold">Producto
+                        {{$producto->nombre}}
+                    </p>
+                    <p>
+                        Datos del cliente:
+                        <br>
+                        Nombre:{{$producto_cambio->cliente->nombre}}<br>
+                        Email:{{$producto_cambio->cliente->email}}<br>
+                        Telefono:{{$producto_cambio->cliente->telefono}}<br>
+                        Tipo:{{$producto_cambio->cliente->tipo}}<br>
+                        Dirección:{{$producto_cambio->cliente->direccion ?: 'No tiene'}}</p>
+                    <p>Fecha:
+                        {{date("d-m-Y")}}</p>
+                </div>
+
+            </div>
+
+            <footer>
+                <table>
+                    <tr>
+                        <td class="gracias">
+                            <p>GRACIAS POR CONFIAR EN NOSOTROS</p>
+                        </td>
+                    </tr>
+                </table>
+            </footer>
+
+        </body>
+
+    </html>

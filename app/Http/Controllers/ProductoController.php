@@ -10,6 +10,7 @@ use Caffeinated\Shinobi\Models\Role;
 use Mail;
 use App\Http\Requests\ProductoFormRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductoController extends Controller
 {
@@ -185,6 +186,22 @@ class ProductoController extends Controller
 
     public function almacen(Producto $producto, Request $request)
     {
+        //valida la cantidad, tiene que haber al menos 1 
+        $validator = Validator::make($request->all(), [
+          'cantidad' => 'required|int|min:1',
+          'almacen'  => 'required',
+        ], 
+        [
+          'int' => 'El campo debe ser un número',
+          'min' => 'la cantidad minima que se puede transportar es 1',
+        ]);
+
+        if ($validator->fails()) {
+          return redirect()->action('ProductoController@show', ['producto'=>$producto])
+                      ->withErrors($validator)
+                      ->withInput();
+        }
+
         //crea producto
         $producto_cambio = $producto->replicate();
         $producto_cambio->almacene()->dissociate($producto_cambio->almacene);
@@ -201,6 +218,31 @@ class ProductoController extends Controller
         $producto->cantidad -= $request->input('cantidad');
         //guarda
         $producto->save();
+
+      //envia email a el alamacen donde se encuentra el producto para que lo envien al nuevo alamcen 
+      $info = ['producto' => $producto, 'producto_cambio' => $producto_cambio];
+
+      Mail::send('mail_send_unids', $info, function ($message) use($producto){
+        //envia email para el cliente
+        $message->cc($producto->almacene->email, $producto->almacene->nombre)->subject('Administración OrdenaTech');
+        //envia email a administración
+        $message->bcc(config('app.admin.reply'), config('app.admin.user'));
+        //info del que envia
+        $message->from(config('app.admin.mail'), config('app.admin.user'));
+
+      });
+
+
+      //Email al que recibe el producto 
+      Mail::send('mail_arrive_unids', $info, function ($message) use($producto_cambio){
+        //envia email para el cliente
+        $message->cc($producto_cambio->almacene->email, $producto_cambio->almacene->nombre)->subject('Administración Ordenatech');
+        //envia email a administración
+        $message->bcc(config('app.admin.reply'), config('app.admin.user'));
+        //info del que envia
+        $message->from(config('app.admin.mail'), config('app.admin.user'));
+
+      });
 
         //redirige a show
         return redirect()->action('ProductoController@show', ['producto'=>$producto])->with('info', 'almacen actualizado correctamente');
