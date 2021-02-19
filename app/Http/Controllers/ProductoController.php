@@ -245,7 +245,7 @@ class ProductoController extends Controller
       });
 
         //redirige a show
-        return redirect()->action('ProductoController@show', ['producto'=>$producto])->with('info', 'almacen actualizado correctamente');
+        return redirect()->action('ProductoController@show', ['producto'=>$producto_cambio])->with('info', 'almacen actualizado correctamente');
     }
 
 }

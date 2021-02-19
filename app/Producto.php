@@ -13,7 +13,7 @@ class Producto extends Model
    */
   protected $fillable =
   [
-      'nombre', 'numero_serie', 'part_number', 'cantidad_minima', 'incidencia', 'marca', 'modelo', 'ubicacion', 'estado', 'cantidad', 'notas',
+      'nombre', 'part_number', 'cantidad_minima', 'incidencia', 'marca', 'modelo', 'ubicacion', 'notas',
   ];
 
   public function cliente()
@@ -23,5 +23,10 @@ class Producto extends Model
   public function almacene()
   {
     return $this->belongsTo('App\Almacene');
+  }
+
+  public function unids()
+  {
+      return $this->hasMany('App\Unid');
   }
 }
