@@ -85,16 +85,14 @@
                 <p class="font-weight-bold">Procedemos a enviarle este correo electronico para informarle
                     <br>
                     sobre el cambio de almacen del producto "{{$producto->nombre}}" al almacen
-                    {{$producto->almacene->nombre}} en la isla {{$producto->almacene->isla}} a la dirección {{$producto->almacene->direccion}} con código postal {{$producto->almacene->cp}}, la cantidad de este es de
-                    {{$producto->cantidad}}, por favor envie el producto lo antes posible</p>
+                    {{$producto->almacene->nombre}} en la isla {{$producto->almacene->isla}} a la dirección {{$producto->almacene->direccion}} con código postal {{$producto->almacene->cp}}, por favor envie el producto lo antes posible</p>
+
+                <h3>Envie todas las unidades</h3>
 
                 <br>
                 <br>
                 <div class="m-2">
 
-                    <p class="font-weight-bold">Producto
-                        {{$producto->nombre}}
-                    </p>
                     <p>
                         Datos del producto:
                         <br>

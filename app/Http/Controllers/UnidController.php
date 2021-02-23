@@ -29,4 +29,37 @@ class UnidController extends Controller
 
     }
 
+
+    public function store(Producto $producto, Request $request)
+    {
+
+        //valida la cantidad, tiene que haber al menos 1 
+        $validator = Validator::make($request->all(), [
+            'estado'        => 'required',
+            'numero_serie'  => 'required',
+            'notas'         => 'required|min:1',
+        ], 
+        [
+            'required'  => 'Es necesario completar el formulario con :attribute',
+            'min'       => 'debe escribir por lo menos una palabra en :attribute',
+        ]);
+
+        if ($validator->fails()) {
+        return redirect()->action('ProductoController@show', ['producto'=>$producto])
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        //crea producto
+        $unidad= new Unid();
+        $unidad->fill($request->all());
+        //asocia
+        $unidad->producto()->associate($producto);
+        //guarda
+        $unidad->save();
+
+        //redirige a show
+        return redirect()->route('producto.show', ['producto'=>$producto])->with('info', 'unidad creada');
+    }
+
 }

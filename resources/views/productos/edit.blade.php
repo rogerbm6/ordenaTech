@@ -47,10 +47,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                     {{ method_field('PUT') }}
                     <div class="row">
                         <div class="col-md-6">
-                            <fieldset class="form-group">
-                                <label for="numero_serie">Numero de serie</label>
-                                <input type="text" class="form-control" id="numero_serie" name="numero_serie" value="{{$producto->numero_serie}}">
-                            </fieldset>
 
                             <fieldset class="form-group">
                                 <label for="numero_serie">Part number</label>
@@ -79,25 +75,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                                     <label for="incidencia">Incidencia</label>
                                     <input type="text" id="incidencia" name="incidencia" class="form-control" value="{{$producto->incidencia}}">
                                 </fieldset>
-
-                                <label for="estado">Estado</label>
-                                <select class="custom-select" name="estado">
-                                    <option selected>{{$producto->estado}}</option>
-
-                                    <option value="usado">Usado</option>
-
-                                    <option value="nuevo">Nuevo</option>
-
-                                    <option value="averiado">Averiado</option>
-
-                                    <option value="doa">DOA</option>
-
-                                </select>
-                            </fieldset>
-
-                            <fieldset class="form-group">
-                                <label for="cantidad">Cantidad</label>
-                                <input type="number" id="cantidad" name="cantidad" class="form-control" value="{{$producto->cantidad}}">
                             </fieldset>
 
                             <fieldset class="form-group">
@@ -115,21 +92,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 
                                 </select>
                             </fieldset>
-
-                            
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
                             <fieldset class="form-group">
                                 <label for="ubicacion">Ubicación en el almacén</label>
                                 <input type="text" name="ubicacion" id="ubicacion" class="form-control" value="{{$producto->ubicacion}}">
                             </fieldset>
-    
+                            
                         </div>
                     </div>
-                    
-                    
 
                     <div class="form-group">
                         <label for="notas">Notas</label>

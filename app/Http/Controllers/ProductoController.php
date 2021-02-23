@@ -142,7 +142,7 @@ class ProductoController extends Controller
 
         }
         $producto->update($request->all());
-
+/*
         //si hay menos de 3 envia un email a los administradores
         if ($producto->cantidad <= $producto->cantidad_minima ) {
           //variable usada en la vista blade 'mail'
@@ -169,7 +169,7 @@ class ProductoController extends Controller
                 //info del que envia
                 $message->from(config('app.admin.mail'), config('app.admin.user'));
             });
-        }
+        }*/
 
 
         return redirect()->action('ProductoController@show', ['producto'=>$producto])->with('info', 'producto actualizado correctamente');

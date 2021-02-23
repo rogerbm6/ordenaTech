@@ -85,8 +85,7 @@
                 <p class="font-weight-bold">Procedemos a enviarle este correo electronico para informarle
                     <br>
                     sobre la llegada del producto "{{$producto->nombre}}" al almacen
-                    {{$producto->almacene->nombre}}, la cantidad de este es de
-                    {{$producto->cantidad}}</p>
+                    {{$producto->almacene->nombre}}</p>
 
                 <br>
                 <br>

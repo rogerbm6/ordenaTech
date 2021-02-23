@@ -29,10 +29,7 @@ class ProductoFormRequest extends FormRequest
         'nombre'            => 'required|max:45|min:4',
         'marca'             => 'required|max:12|min:4',
         'modelo'            => 'required|max:35|min:4',
-        'numero_serie'      => 'required|max:12|min:4',
         'ubicacion'         => 'required|max:70|min:7',
-        'estado'            => 'required',
-        'cantidad'          => 'required|int|min:0',
         'notas'             => 'required|max:1000',
         'almacen'           => 'required|int',
       ];

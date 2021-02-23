@@ -44,10 +44,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
-                            <fieldset class="form-group">
-                                <label for="numero_serie">Numero de serie</label>
-                                <input type="text" class="form-control" id="numero_serie" name="numero_serie" value="{{old('numero_serie')}}">
-                            </fieldset>
+                            
 
                             <fieldset class="form-group">
                                 <label for="numero_serie">Part number</label>
@@ -76,24 +73,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                                     <label for="incidencia">Incidencia</label>
                                     <input type="text" id="incidencia" name="incidencia" class="form-control" value="{{old('incidencia')}}">
                                 </fieldset>
-
-                                <label for="estado">Estado</label>
-                                <select class="custom-select" name="estado" required>
-
-                                    <option value="usado">Usado</option>
-
-                                    <option value="nuevo">Nuevo</option>
-
-                                    <option value="averiado">Averiado</option>
-
-                                    <option value="doa">DOA</option>
-
-                                </select>
-                            </fieldset>
-
-                            <fieldset class="form-group">
-                                <label for="cantidad">Cantidad</label>
-                                <input type="number" id="cantidad" name="cantidad" class="form-control" value="{{old('cantidad')}}">
                             </fieldset>
 
                             <fieldset class="form-group">
@@ -110,14 +89,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                                     @endforeach
 
                                 </select>
+
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label for="ubicacion">Ubicación en el almacén</label>
+                                <input type="text" name="ubicacion" id="ubicacion" class="form-control" value="{{old('ubicacion')}}">
                             </fieldset>
                         </div>
                     </div>
 
-                    <fieldset class="form-group">
-                        <label for="ubicacion">Ubicación en el almacén</label>
-                        <input type="text" name="ubicacion" id="ubicacion" class="form-control" value="{{old('ubicacion')}}">
-                    </fieldset>
+
 
 
                     <div class="form-group">

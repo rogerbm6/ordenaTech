@@ -85,6 +85,10 @@ Route::middleware(['auth','verified'])->group(function () {
       Route::delete('producto/unidad/delete/{unidad}', 'UnidController@destroy')->name('unid.destroy')
             ->middleware('permission:productos.destroy');
 
+    //crear unidad (post)
+      Route::post('producto/{producto}/unidad', 'UnidController@store')->name('unid.store')
+            ->middleware('permission:productos.create');
+
       /*-------------------Almacenes------------------*/
     //crear almacen (post)
       Route::post('almacen/store', 'AlmacenController@store')->name('almacenes.store')
