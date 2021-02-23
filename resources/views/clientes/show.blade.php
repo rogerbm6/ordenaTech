@@ -108,7 +108,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
             <table class="table align-items-center table-flush" id='tabla'>
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col">S/N</th>
                         <th scope="col">P/N</th>
                         <th scope="col">Incidencia</th>
                         <th scope="col">Modelo</th>

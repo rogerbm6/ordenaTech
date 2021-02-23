@@ -13,11 +13,11 @@ class Unid extends Model
    */
     protected $fillable =
     [
-        'numero_serie', 'estado',
+        'numero_serie', 'estado', 'notas',
     ];
 
     public function producto()
     {
-        return $this->belongsTo('App\Unid');
+        return $this->belongsTo('App\Producto');
     }
 }

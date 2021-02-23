@@ -68,6 +68,7 @@ Route::middleware(['auth','verified'])->group(function () {
     //actualiza el almacen de un producto
       Route::put('producto/{producto}/almacen', 'ProductoController@almacen')->name('producto.almacen')
             ->middleware('permission:productos.edit');
+
       //formulario de actualizar
       Route::get('producto/{producto}/edit', 'ProductoController@edit')->name('producto.edit')
             ->middleware('permission:productos.edit');
@@ -75,7 +76,16 @@ Route::middleware(['auth','verified'])->group(function () {
       Route::delete('producto/{producto}', 'ProductoController@destroy')->name('producto.destroy')
             ->middleware('permission:productos.destroy');
 
-    /*-------------------Almacenes------------------*/
+      /*-------------------Unnidades------------------*/
+      //actualiza la unidad de un producto
+      Route::put('producto/{unidad}/unidad', 'UnidController@updateUnid')->name('unid.update')
+            ->middleware('permission:productos.edit');
+
+      //elimina una unidad
+      Route::delete('producto/unidad/delete/{unidad}', 'UnidController@destroy')->name('unid.destroy')
+            ->middleware('permission:productos.destroy');
+
+      /*-------------------Almacenes------------------*/
     //crear almacen (post)
       Route::post('almacen/store', 'AlmacenController@store')->name('almacenes.store')
             ->middleware('permission:almacenes.create');
@@ -123,7 +133,7 @@ Route::middleware(['auth','verified'])->group(function () {
 
     //Descarga pdf de cliente
       Route::get('cliente/pdf/{cliente}', 'ClienteController@exportPdf')->name('clientes.pdf')
-                    ->middleware('permission:clientes.index');
+            ->middleware('permission:clientes.index');
 
     /*-------------------Usuarios------------------*/
     //Muesta user

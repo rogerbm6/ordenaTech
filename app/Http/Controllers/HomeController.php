@@ -8,6 +8,7 @@ use App\Almacene;
 use App\Producto;
 use App\Cliente;
 use App\User;
+use App\Unid;
 use App\Charts\ProductosChart;
 
 class HomeController extends Controller
@@ -37,10 +38,10 @@ class HomeController extends Controller
         $numAlmacenes = $almacenes->count();
 
         //datos del grafico tipo productos
-        $productosUsados = Producto::where('estado', 'usado')->get();
-        $productosNuevos = Producto::where('estado', 'nuevo')->get();
-        $productosAveriados = Producto::where('estado', 'averiado')->get();
-        $productosDoa = Producto::where('estado', 'doa')->get();
+        $unidadUsados = Unid::where('estado', 'usado')->get();
+        $unidadNuevos = Unid::where('estado', 'nuevo')->get();
+        $unidadAveriados = Unid::where('estado', 'averiado')->get();
+        $unidadDoa = Unid::where('estado', 'doa')->get();
 
 
         //grafico tipos producto
@@ -48,31 +49,32 @@ class HomeController extends Controller
         //tipos
         $tipoProducto->labels(['Usados','Nuevos','Averiados', 'DOA']);
         //nombre, tipo y datos a mostrar
-        $tipoProducto->dataset('Estadisticas', 'doughnut', [$productosUsados->count(), $productosNuevos->count(), $productosAveriados->count(), $productosDoa->count()])->backgroundColor(['#f99add', '#a0aff6', '#cc9687', '#f6e66e']);
+        $tipoProducto->dataset('Estadisticas', 'doughnut', [$unidadUsados->count(), $unidadNuevos->count(), $unidadAveriados->count(), $unidadDoa->count()])->backgroundColor(['#f99add', '#a0aff6', '#cc9687', '#f6e66e']);
         //Titulo del gráfico
         $tipoProducto->title( 'Tipos de productos', 14,'black', true,"sans-serif");
 
 
         //datos de grafico almacenes
-        $nombres=[];
-        $cantidades=[];
-        $colores=[];
+        $datos=['nombres'    => [],
+                'cantidades' => [],
+                'colores'    => []
+            ];
+        
         foreach ($almacenes as $almacen) {
-          array_push($nombres, "$almacen->nombre");
-          array_push($cantidades, $almacen->productos->count());
-          array_push($colores, sprintf('#%06X', mt_rand(0, 0xFFFFFF)));
+            array_push($datos['nombres'], "$almacen->nombre");
+            array_push($datos['cantidades'], $almacen->productos->count());
+            array_push($datos['colores'], sprintf('#%06X', mt_rand(0, 0xFFFFFF)));
         }
 
 
         //grafico almacenesProductos
         $productosAlmacen = new ProductosChart;
         //barras
-        $productosAlmacen->labels($nombres);
+        $productosAlmacen->labels($datos['nombres']);
         //nombre, tipo y datos a mostrar
-        $productosAlmacen->dataset('Almacenes', 'polarArea', $cantidades)->backgroundColor($colores);
+        $productosAlmacen->dataset('Almacenes', 'polarArea', $datos['cantidades'])->backgroundColor($datos['colores']);
         //Titulo del gráfico
         $productosAlmacen->title( 'Cantidad de productos en almacenes', 14,'black', true,"sans-serif");
-
 
         //grafico estadisticas
         $estadisticas = new ProductosChart;

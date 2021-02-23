@@ -27,16 +27,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
             </div>
         </div>
     </div>
-    @endif
-
-    @if ($errors->any())
+    @endif @if ($errors->any())
     <div class="row justify-content-center">
         <div class="col-sm-12">
             <div class="alert alert-danger">
                 <ul>
                     @foreach($errors->all() as $error)
-                        <li>{{$error}}</li>
-                        @endforeach
+                    <li>{{$error}}</li>
+                    @endforeach
                 </ul>
             </div>
         </div>
@@ -56,257 +54,357 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                 <div class="row mb-4 ml-1 ">
                     <div class="col-sm-12 col-md-5 p-2">
                         <p class="card-text">
-                            <span class="font-weight-bold">S/N:</span>
-                            {{$producto->numero_serie}}</p>
 
-                        <p class="card-text">
-                            <span class="font-weight-bold">P/N:</span>
-                            {{$producto->part_number}}</p>
+                            <p class="card-text">
+                                <span class="font-weight-bold">P/N:</span>
+                                {{$producto->part_number}}</p>
 
-                        <p class="card-text">
-                            <span class="font-weight-bold">Nombre:</span>
-                            {{$producto->nombre}}</p>
+                            <p class="card-text">
+                                <span class="font-weight-bold">Nombre:</span>
+                                {{$producto->nombre}}</p>
 
-                        <p class="card-text">
-                            <span class="font-weight-bold">Marca:</span>
-                            {{$producto->marca}}</p>
+                            <p class="card-text">
+                                <span class="font-weight-bold">Marca:</span>
+                                {{$producto->marca}}</p>
+                        </div>
+                        <div class="col-sm-12 col-md-5 p-2">
+                            <p class="card-text">
+                                <span class="font-weight-bold">Incidencia:</span>
+                                {{$producto->incidencia}}</p>
+
+                            <p class="card-text">
+                                <span class="font-weight-bold">Modelo:</span>
+                                {{$producto->modelo}}</p>
+
+                            <p class="card-text">
+                                <span class="font-weight-bold">Ubicación:</span>
+                                {{$producto->ubicacion}}</p>
+
+                        </div>
                     </div>
-                    <div class="col-sm-12 col-md-5 p-2">
-                        <p class="card-text">
-                            <span class="font-weight-bold">Incidencia:</span>
-                            {{$producto->incidencia}}</p>
-
-                        <p class="card-text">
-                            <span class="font-weight-bold">Modelo:</span>
-                            {{$producto->modelo}}</p>
-
-                        <p class="card-text">
-                            <span class="font-weight-bold">Estado:</span>
-                            {{$producto->estado}}</p>
-
-                        <p class="card-text">
-                            <span class="font-weight-bold">Ubicación:</span>
-                            {{$producto->ubicacion}}</p>
-
+                    <div class="row mt-2 mb-4">
+                        <div class="col-md-3">
+                            <p class="h3">Cantidad:
+                                {{count($producto->unids)}}</p>
+                        </div>
+                        <div class="col-md-9 pt-2">
+                            <p class="h5">
+                                "{{$producto->notas}}"</p>
+                        </div>
                     </div>
-                </div>
-                <div class="row mt-2 mb-4">
-                    <div class="col-md-3">
-                        <p class="h3">Cantidad:
-                            {{$producto->cantidad}}</p>
-                    </div>
-                    <div class="col-md-9 pt-2">
-                        <p class="h5">
-                            {{$producto->notas}}</p>
-                    </div>
-                </div>
-                @can ('productos.edit')
-                <a
-                    type="button"
-                    href="{{route('producto.edit',$producto->id)}}"
-                    class="btn btn-warning">
-                    <i class="fas fa-user-edit"></i>
-                    Editar</a>
-                @endcan @can ('productos.edit')
-                <!-- Button trigger modal -->
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    data-toggle="modal"
-                    data-target="#exampleModal">
-                    <i class="fas fa-exchange-alt"></i>
-                    Enviar a almacen
-                </button>
+                    <!-- Button trigger modal VER UNIDADES-->
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        data-toggle="modal"
+                        data-target="#verUnidades">
+                        <i class="fas fa-eye"></i>
+                        Ver unidades
+                    </button>
 
-                <!-- Modal -->
-                <div
-                    class="modal fade"
-                    id="exampleModal"
-                    tabindex="-1"
-                    role="dialog"
-                    aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Cambio de almacen</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <form
-                                method="post"
-                                action="{{route('producto.almacen', $producto->id)}}"
-                                enctype="multipart/form-data">
-                                @csrf
-                                {{ method_field('PUT') }}
+                    <!-- Modal -->
+                    <div
+                        class="modal fade"
+                        id="verUnidades"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Lista de productos</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
                                 <div class="modal-body">
 
-                                    <h5>Elige el almacen al que quieres enviar el producto</h5>
-                                    <fieldset class="form-group">
-                                        <label for="almacen">Almacén</label>
-                                        <select class="custom-select" name="almacen">
-                                            @foreach ($almacenes as $almacen)
-                                            <option value="{{$almacen->id}}">{{$almacen->nombre}}</option>
-                                            @endforeach
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="row">
+                                                @foreach ($producto->unids as $unidad)
 
-                                        </select>
-                                    </fieldset>
-                                    <hr>
-                                        <h5>¿Cuantas unidades quieres enviar?</h5>
-                                        <fieldset class="form-group">
-                                            <label for="cantidad">Cantidad</label>
-                                            <input
-                                                type="number"
-                                                id="cantidad"
-                                                name="cantidad"
-                                                class="form-control"
-                                                value="{{$producto->cantidad}}"></fieldset>
+                                                <fieldset class="form-group col-md-3 col-sm-12">
+                                                    <form
+                                                        method="post"
+                                                        action="{{route('unid.update', $unidad->id)}}"
+                                                        enctype="multipart/form-data"
+                                                        class="form-group"
+                                                        style="display: inline-block;">
+                                                        @csrf
+                                                        {{ method_field('PUT') }}
+                                                        <input
+                                                            type="text"
+                                                            class="form-control"
+                                                            id="numero_serie"
+                                                            name="numero_serie"
+                                                            value="{{$unidad->numero_serie}}"></fieldset>
+                                                        <fieldset class="form-group col-md-2 col-sm-12 my-1">
+
+                                                            <select class="custom-select " name="estado">
+                                                                <option selected="selected">{{$unidad->estado}}</option>
+
+                                                                <option value="usado">Usado</option>
+
+                                                                <option value="nuevo">Nuevo</option>
+
+                                                                <option value="averiado">Averiado</option>
+
+                                                                <option value="doa">DOA</option>
+
+                                                            </select>
+                                                        </fieldset>
+
+                                                        <div class="form-group col-md-5 col-sm-12">
+                                                            <textarea class="form-control" id="notas" name="notas" rows="01">{{$unidad->notas}}</textarea>
+                                                        </div>
+
+                                                        <div class="col-md-2 px-1">
+                                                            <button type="submit" class="btn btn-warning">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                        
+
+                                                    </form>
+                                                    <form action="{{route('unid.destroy',$unidad->id)}}"
+                                                        method="POST"
+                                                        style="display:inline">
+                                                        {{ method_field('DELETE') }}
+                                                        {!! csrf_field() !!}
+                                                        <button type="submit" class="btn btn-danger" style="display:inline">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                                    @endforeach
+
+                                                </div>
+
+                                            </div>
+
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                            <button type="submit" class="btn btn-primary">
-                                                Enviar
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        @endcan @can ('productos.destroy')
-                        <button
-                            type="button"
-                            class="btn btn-danger"
-                            data-toggle="modal"
-                            data-target="#eliminar">
-                            <i class="fas fa-trash"></i>
-                            Eliminar
-                        </button>
-                        <!-- Modal -->
-                        <div
-                            class="modal fade"
-                            id="eliminar"
-                            tabindex="-1"
-                            role="dialog"
-                            aria-labelledby="eliminarLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="eliminarLabel">Eliminar</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-
-                                    <div class="modal-body">
-
-                                        <h5>¿Estás seguro de eliminar este producto?</h5>
 
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        <form
-                                            action="{{route('producto.destroy',$producto->id)}}"
-                                            method="POST"
-                                            style="display:inline">
-                                            {{ method_field('DELETE') }}
-                                            {!! csrf_field() !!}
-                                            <button type="submit" class="btn btn-danger" style="display:inline">
-                                                <i class="fas fa-trash"></i>
-                                                Borrar
-                                            </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            Actualizar
+                                        </button>
+                                    </div>
 
+                                </div>
+                            </div>
+                        </div>
+
+                        @can ('productos.edit')
+                        <a
+                            type="button"
+                            href="{{route('producto.edit',$producto->id)}}"
+                            class="btn btn-warning">
+                            <i class="fas fa-user-edit"></i>
+                            Editar</a>
+                        @endcan @can ('productos.edit')
+                        <!-- Button trigger modal -->
+                        <button
+                            type="button"
+                            class="btn btn-success"
+                            data-toggle="modal"
+                            data-target="#exampleModal">
+                            <i class="fas fa-exchange-alt"></i>
+                            Enviar a almacen
+                        </button>
+
+                        <!-- Modal -->
+                        <div
+                            class="modal fade"
+                            id="exampleModal"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Cambio de almacen</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form
+                                        method="post"
+                                        action="{{route('producto.almacen', $producto->id)}}"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        {{ method_field('PUT') }}
+                                        <div class="modal-body">
+
+                                            <h5>Elige el almacen al que quieres enviar el producto</h5>
+                                            <fieldset class="form-group">
+                                                <label for="almacen">Almacén</label>
+                                                <select class="custom-select" name="almacen">
+                                                    @foreach ($almacenes as $almacen)
+                                                    <option value="{{$almacen->id}}">{{$almacen->nombre}}</option>
+                                                    @endforeach
+
+                                                </select>
+                                            </fieldset>
+                                            <hr>
+                                                <h5>¿Cuantas unidades quieres enviar?</h5>
+                                                <fieldset class="form-group">
+                                                    <label for="cantidad">Cantidad</label>
+                                                    <input
+                                                        type="number"
+                                                        id="cantidad"
+                                                        name="cantidad"
+                                                        class="form-control"
+                                                        value="{{$producto->cantidad}}"></fieldset>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                    <button type="submit" class="btn btn-primary">
+                                                        Enviar
+                                                    </button>
+                                                </div>
+                                            </form>
                                         </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        @endcan
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-5 col-sm-7">
-                <div class="row mb-2">
-                    @can ('clientes.index')
-                    <div class="col-md-12 mb-2">
-                        <div class="card">
-                            <div class="card-header">
-                                Cliente
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Datos del Cliente</h5>
-                                <div class="row mb-4 ml-1 float-sm-left">
-                                    <div class="col-sm-12 col-md-5 p-2">
-                                        <p class="card-text">
-                                            <span class="font-weight-bold">Nombre:</span>
-                                            {{$producto->cliente->nombre}}</p>
-
-                                        <p class="card-text">
-                                            <span class="font-weight-bold">Telefono:</span>
-                                            {{$producto->cliente->telefono}}</p>
-                                    </div>
-                                    <div class="col-sm-12 col-md-5 p-2">
-                                        <p class="card-text">
-                                            <span class="font-weight-bold">Tipo:</span>
-                                            {{$producto->cliente->tipo}}</p>
-
-                                        <p class="card-text">
-                                            <span class="font-weight-bold">Direccón:</span>
-                                            {{$producto->cliente->direccion ?:'No tiene'}}</p>
-
                                     </div>
                                 </div>
-                                <a
-                                    href="{{route('clientes.show',$producto->cliente->id)}}"
-                                    class="btn btn-primary">Ir al cliente</a>
-                            </div>
-                        </div>
-                    </div>
-                    @endcan @can ('almacenes.index')
+                                @endcan @can ('productos.destroy')
+                                <button
+                                    type="button"
+                                    class="btn btn-danger"
+                                    data-toggle="modal"
+                                    data-target="#eliminar">
+                                    <i class="fas fa-trash"></i>
+                                    Eliminar
+                                </button>
+                                <!-- Modal -->
+                                <div
+                                    class="modal fade"
+                                    id="eliminar"
+                                    tabindex="-1"
+                                    role="dialog"
+                                    aria-labelledby="eliminarLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="eliminarLabel">Eliminar</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
 
-                    <div class="col-md-12 mb-2">
-                        <div class="card">
-                            <div class="card-header">
-                                Almacen
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Datos del Almacen</h5>
-                                <div class="row mb-4 ml-1 float-left">
-                                    <div class="col-sm-12 col-md-5 p-2 float-left">
-                                        <p class="card-text">
-                                            <span class="font-weight-bold">Nombre:</span>
-                                            {{$producto->almacene->nombre}}</p>
+                                            <div class="modal-body">
 
-                                        <p class="card-text">
-                                            <span class="font-weight-bold">Isla:</span>
-                                            {{$producto->almacene->isla}}</p>
-                                    </div>
-                                    <div class="col-sm-12 col-md-5 p-2">
-                                        <p class="card-text">
-                                            <span class="font-weight-bold">CP:</span>
-                                            {{$producto->almacene->cp}}</p>
+                                                <h5>¿Estás seguro de eliminar este producto?</h5>
 
-                                        <p class="card-text">
-                                            <span class="font-weight-bold">Direccón:</span>
-                                            {{$producto->almacene->direccion ?:'No tiene'}}</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <form
+                                                    action="{{route('producto.destroy',$producto->id)}}"
+                                                    method="POST"
+                                                    style="display:inline">
+                                                    {{ method_field('DELETE') }}
+                                                    {!! csrf_field() !!}
+                                                    <button type="submit" class="btn btn-danger" style="display:inline">
+                                                        <i class="fas fa-trash"></i>
+                                                        Borrar
+                                                    </button>
 
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                                @can ('almacenes.show')
-                                <a
-                                    href="{{route('almacenes.show',$producto->almacene->id)}}"
-                                    class="btn btn-primary">Ir al almacen</a>
+
                                 @endcan
-
                             </div>
                         </div>
                     </div>
-                    @endcan
-                </div>
-            </div>
-        </div>
 
-        @stop
+                    <div class="col-md-5 col-sm-7">
+                        <div class="row mb-2">
+                            @can ('clientes.index')
+                            <div class="col-md-12 mb-2">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Cliente
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Datos del Cliente</h5>
+                                        <div class="row mb-4 ml-1 float-sm-left">
+                                            <div class="col-sm-12 col-md-5 p-2">
+                                                <p class="card-text">
+                                                    <span class="font-weight-bold">Nombre:</span>
+                                                    {{$producto->cliente->nombre}}</p>
+
+                                                <p class="card-text">
+                                                    <span class="font-weight-bold">Telefono:</span>
+                                                    {{$producto->cliente->telefono}}</p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-5 p-2">
+                                                <p class="card-text">
+                                                    <span class="font-weight-bold">Tipo:</span>
+                                                    {{$producto->cliente->tipo}}</p>
+
+                                                <p class="card-text">
+                                                    <span class="font-weight-bold">Direccón:</span>
+                                                    {{$producto->cliente->direccion ?:'No tiene'}}</p>
+
+                                            </div>
+                                        </div>
+                                        <a
+                                            href="{{route('clientes.show',$producto->cliente->id)}}"
+                                            class="btn btn-primary">Ir al cliente</a>
+                                    </div>
+                                </div>
+                            </div>
+                            @endcan @can ('almacenes.index')
+
+                            <div class="col-md-12 mb-2">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Almacen
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Datos del Almacen</h5>
+                                        <div class="row mb-4 ml-1 float-left">
+                                            <div class="col-sm-12 col-md-5 p-2 float-left">
+                                                <p class="card-text">
+                                                    <span class="font-weight-bold">Nombre:</span>
+                                                    {{$producto->almacene->nombre}}</p>
+
+                                                <p class="card-text">
+                                                    <span class="font-weight-bold">Isla:</span>
+                                                    {{$producto->almacene->isla}}</p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-5 p-2">
+                                                <p class="card-text">
+                                                    <span class="font-weight-bold">CP:</span>
+                                                    {{$producto->almacene->cp}}</p>
+
+                                                <p class="card-text">
+                                                    <span class="font-weight-bold">Direccón:</span>
+                                                    {{$producto->almacene->direccion ?:'No tiene'}}</p>
+
+                                            </div>
+                                        </div>
+                                        @can ('almacenes.show')
+                                        <a
+                                            href="{{route('almacenes.show',$producto->almacene->id)}}"
+                                            class="btn btn-primary">Ir al almacen</a>
+                                        @endcan
+
+                                    </div>
+                                </div>
+                            </div>
+                            @endcan
+                        </div>
+                    </div>
+                </div>
+
+                @stop

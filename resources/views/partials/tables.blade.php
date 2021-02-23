@@ -53,9 +53,7 @@
         $('#tabla').DataTable({
             "serverSide": true,
             "ajax": "{{Request::url()}}",
-            "columns": [{
-                    data: "numero_serie"
-                },
+            "columns": [
                 {
                     data: 'part_number'
                 },
@@ -109,10 +107,9 @@
     $(document).ready(function() {
         $('#tabla').DataTable({
             "serverSide": true,
+            "processing": true,
             "ajax": "{{route('producto.index')}}",
-            "columns": [{
-                    data: "numero_serie"
-                },
+            "columns": [
                 {
                     data: 'part_number'
                 },
@@ -127,9 +124,6 @@
                 },
                 {
                     data: 'marca'
-                },
-                {
-                    data: 'cantidad'
                 },
                 {
                     data: 'cliente'
@@ -170,9 +164,7 @@
         $('#tabla').DataTable({
             "serverSide": true,
             "ajax": "{{Request::url()}}",
-            "columns": [{
-                    data: "numero_serie"
-                },
+            "columns": [
                 {
                     data: 'part_number'
                 },
@@ -187,9 +179,6 @@
                 },
                 {
                     data: 'marca'
-                },
-                {
-                    data: 'cantidad'
                 },
                 {
                     data: 'cliente'

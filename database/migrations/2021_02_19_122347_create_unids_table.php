@@ -17,6 +17,7 @@ class CreateUnidsTable extends Migration
             $table->increments('id');
             $table->string('numero_serie',12);
             $table->enum('estado', ['usado', 'nuevo', 'averiado', 'doa']);
+            $table->string('notas',1000);
             //foranea de productos 
             $table->unsignedInteger('producto_id');
             $table->foreign('producto_id')->references('id')->on('productos')->onDelete('cascade');

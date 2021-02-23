@@ -248,4 +248,5 @@ class ProductoController extends Controller
         return redirect()->action('ProductoController@show', ['producto'=>$producto_cambio])->with('info', 'almacen actualizado correctamente');
     }
 
+
 }

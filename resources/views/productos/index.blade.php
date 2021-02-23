@@ -71,13 +71,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
             <table class="table align-items-center table-flush" id="tabla">
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col">S/N</th>
                         <th scope="col">P/N</th>
                         <th scope="col">Incidencia</th>
                         <th scope="col">Modelo</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Marca</th>
-                        <th scope="col">Cantidad</th>
                         <th scope="col">Cliente</th>
                         <th scope="col">Almacen</th>
                         <th scope="col"></th>
