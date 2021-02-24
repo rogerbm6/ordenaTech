@@ -298,15 +298,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form
-                                            method="post"
-                                            action="{{route('producto.almacen', $producto->id)}}"
-                                            enctype="multipart/form-data">
-                                            @csrf
-                                            {{ method_field('PUT') }}
+                                        {!!Form::model($producto, ['route' => ['producto.almacen', $producto->id], 'method' => 'PUT'])!!}
                                             <div class="modal-body">
 
-                                                <h5>Elige el almacen al que quieres enviar el producto</h5>
+                                                <h5>Elige el almacen al que quieres enviar</h5>
                                                 <fieldset class="form-group">
                                                     <label for="almacen">Almacén</label>
                                                     <select class="custom-select" name="almacen">
@@ -317,15 +312,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                                                     </select>
                                                 </fieldset>
                                                 <hr>
-                                                    <h5>¿Cuantas unidades quieres enviar?</h5>
+                                                    <h5>¿Que unidades quieres enviar?</h5>
                                                     <fieldset class="form-group">
-                                                        <label for="cantidad">Cantidad</label>
-                                                        <input
-                                                            type="number"
-                                                            id="cantidad"
-                                                            name="cantidad"
-                                                            class="form-control"
-                                                            value="{{$producto->cantidad}}"></fieldset>
+                                                        <ul class="list-unstyled p-2">
+                                                            <div class="row">
+                                                                @foreach ($producto->unids as $unidad)
+                                                                <div class="col-md-6">
+                                                                    <li>
+                                                                        <label>
+                                                                            {{Form::checkbox('unidades[]', $unidad->id,null)}}
+                                                                            {{$unidad->numero_serie}}
+                                                                            <em>({{$unidad->estado}})</em>
+                                                                        </label>
+                                
+                                                                    </li>
+                                                                </div>
+                                                                @endforeach
+                                                            </div>
+                                
+                                                        </ul>
+
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -333,7 +339,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                                                             Enviar
                                                         </button>
                                                     </div>
-                                                </form>
+                                                    {!! Form::close() !!}
                                             </div>
                                         </div>
                                     </div>

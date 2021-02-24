@@ -78,6 +78,7 @@ class RoleController extends Controller
 
   public function update(Role $rol, RolFormRequest $request)
   {
+
       //Actualiza el rol
       $rol->update($request->all());
 

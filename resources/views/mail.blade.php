@@ -77,7 +77,7 @@
     <hr>
     <div class="main">
         <p>Por favor, no responda a este mensaje, es un envío automático.</p>
-        <p class="font-weight-bold">Procedemos a enviarle este correo electronico para informarle <br> que uno de los productos del almacen {{$producto->almacene->nombre}} ha reducido su cantidad a {{$producto->cantidad}}</p>
+        <p class="font-weight-bold">Procedemos a enviarle este correo electronico para informarle <br> que uno de los productos del almacen {{$producto->almacene->nombre}} ha reducido su cantidad a {{count($producto->unids)}}</p>
 
         <br>
         <br>

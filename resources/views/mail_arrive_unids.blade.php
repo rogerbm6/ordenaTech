@@ -78,34 +78,64 @@
             </header>
             <h1 class="lead">
                 Cordial saludo,
-                {{$producto_cambio->almacene->nombre}}</h1>
+                {{$almacen_nuevo->nombre}}</h1>
             <hr>
             <div class="main">
                 <p>Por favor, no responda a este mensaje, es un envío automático.</p>
                 <p class="font-weight-bold">Procedemos a enviarle este correo electronico para informarle
                     <br>
-                    sobre el cambio de almacen del producto "{{$producto->nombre}}" de "{{$producto->almacene->nombre}}"al  almacen<br>
-                    "{{$producto_cambio->almacene->nombre}}" en la<br> isla {{$producto_cambio->almacene->isla}} a la dirección <br>{{$producto_cambio->almacene->direccion}} con código<br> postal {{$producto->almacene->cp}}, la cantidad de este es de<br>
-                    {{$producto_cambio->cantidad}}, por favor espere atento la llegada del mismo</p>
+                    sobre el cambio de almacen del producto "{{$producto->nombre}}" de "{{$producto->almacene->nombre}}"al almacen<br>
+                    "{{$almacen_nuevo->nombre}}" en la<br>
+                    isla
+                    {{$almacen_nuevo->isla}}
+                    a la dirección
+                    <br>{{$almacen_nuevo->direccion}}
+                    con código<br>
+                    postal
+                    {{$almacen_nuevo->cp}}, por favor verifique el cambio en el sistema
+                </p>
                 <br>
                 <br>
-                <h2 class="font-weight-bold">Cantidad a recibir: {{$producto_cambio->cantidad}}</h2>
+                <h2 class="font-weight-bold">Los productos con este Numero de serie</h2>
                 <br>
+                <ul class="list-unstyled p-2" style="list-style: none; margin-right: 3%;">
+                    <div class="row">
+
+                        <div>
+
+                            @foreach ($unids as $unidad)
+                            <p>
+                                <li>
+                                    {{$unidad->numero_serie}}
+                                    <em>({{$unidad->estado}})</em><br>
+                                </li>
+                            </p>
+
+                            @endforeach
+
+                        </div>
+
+                    </div>
+                </ul>
                 <div class="m-2">
 
                     <p class="font-weight-bold">Producto
-                        {{$producto->nombre}} 
+                        {{$producto->nombre}}<br>
+                        Part Number:
+                        {{$producto->part_number}}<br>
+                        Incidencia :
+                        {{$producto->incidencia}}<br>
                     </p>
                     <p>
                         Datos del cliente:
                         <br>
-                        Nombre:{{$producto_cambio->cliente->nombre}}<br>
-                        Email:{{$producto_cambio->cliente->email}}<br>
-                        Telefono:{{$producto_cambio->cliente->telefono}}<br>
-                        Tipo:{{$producto_cambio->cliente->tipo}}<br>
-                        Dirección:{{$producto_cambio->cliente->direccion ?: 'No tiene'}}</p>
-                    <p>Fecha:
-                        {{date("d-m-Y")}}</p>
+                        Nombre:{{$producto->cliente->nombre}}<br>
+                        Email:{{$producto->cliente->email}}<br>
+                        Telefono:{{$producto->cliente->telefono}}<br>
+                        Tipo:{{$producto->cliente->tipo}}<br>
+                        Dirección:{{$producto->cliente->direccion ?: 'No tiene'}}</p>
+                    <h4>Fecha:
+                        {{date("d-m-Y")}}</h4>
                 </div>
 
             </div>

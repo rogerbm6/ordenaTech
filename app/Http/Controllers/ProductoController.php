@@ -6,6 +6,7 @@ use App\Cliente;
 use App\Almacene;
 use App\Producto;
 use App\User;
+use App\Unid;
 use Caffeinated\Shinobi\Models\Role;
 use Mail;
 use App\Http\Requests\ProductoFormRequest;
@@ -143,33 +144,7 @@ class ProductoController extends Controller
         }
         $producto->update($request->all());
 /*
-        //si hay menos de 3 envia un email a los administradores
-        if ($producto->cantidad <= $producto->cantidad_minima ) {
-          //variable usada en la vista blade 'mail'
-            $info = ['producto' => $producto];
-
-            if ($producto->cantidad == 0) {
-
-              Mail::send('mail_without_product', $info, function ($message) use($producto){
-                //envia email para el cliente
-                $message->cc($producto->cliente->email, $producto->cliente->nombre)->subject('Administración OrdenaTech');
-                //envia email a administración
-                $message->bcc(config('app.admin.reply'), config('app.admin.user'));
-                //info del que envia
-                $message->from(config('app.admin.mail'), config('app.admin.user'));
-
-                return redirect()->action('ProductoController@show', ['producto'=>$producto])->with('info', 'producto actualizado correctamente');
-              });
-            }
-            Mail::send('mail', $info, function ($message) use($producto){
-                //envia email para el cliente
-                $message->cc($producto->cliente->email, $producto->cliente->nombre)->subject('Administración OrdenaTech');
-                //envia email a administración
-                $message->bcc(config('app.admin.reply'), config('app.admin.user'));
-                //info del que envia
-                $message->from(config('app.admin.mail'), config('app.admin.user'));
-            });
-        }*/
+        */
 
 
         return redirect()->action('ProductoController@show', ['producto'=>$producto])->with('info', 'producto actualizado correctamente');
@@ -188,12 +163,12 @@ class ProductoController extends Controller
     {
         //valida la cantidad, tiene que haber al menos 1 
         $validator = Validator::make($request->all(), [
-          'cantidad' => 'required|int|min:1',
+          'unidades' => 'required|min:1',
           'almacen'  => 'required',
         ], 
         [
-          'int' => 'El campo debe ser un número',
-          'min' => 'la cantidad minima que se puede transportar es 1',
+          'required' => 'es necesario llenar :attribute',
+          'min'      => 'la cantidad minima que se puede transportar es 1',
         ]);
 
         if ($validator->fails()) {
@@ -201,7 +176,55 @@ class ProductoController extends Controller
                       ->withErrors($validator)
                       ->withInput();
         }
+        //almacen nuevo
+        $almacen = Almacene::find($request->get('almacen'));
+        $unids=[];
+        //compara el producto con todos los del almacen para no duplicar
+        foreach ($almacen->productos as $producto_almacen) {
+          if ($producto_almacen->part_number   ==   $producto->part_number && 
+              $producto_almacen->incidencia    ==   $producto->incidencia && 
+              $producto_almacen->nombre        ==   $producto->nombre && 
+              $producto_almacen->marca         ==   $producto->marca && 
+              $producto_almacen->cliente->id   ==   $producto->cliente->id) {
+          
+          //desasocia las unidades del producto para asociarlo a el nuevo
+          foreach ($request->get('unidades') as $unidad) {
+            $unid=Unid::find($unidad);
+            $unid->producto()->dissociate($producto);
+            $unid->producto()->associate($producto_almacen);
+            $unid->save();
+            array_push($unids,$unid);
+          }
+          //Envio de email a el almacen antiguo
+          $info1 = ['almacen' => $producto->almacen, 'producto' => $producto, 'almacen_nuevo' => $almacen, 'unids'=>$unids];
 
+          Mail::send('mail_send_unids', $info1, function ($message) use($producto){
+            //envia email para el cliente
+            $message->cc($producto->almacene->email, $producto->almacene->nombre)->subject('Administración OrdenaTech');
+            //envia email a administración
+            $message->bcc(config('app.admin.reply'), config('app.admin.user'));
+            //info del que envia
+            $message->from(config('app.admin.mail'), config('app.admin.user'));
+
+          });
+
+          
+          //Email al que recibe el producto 
+          Mail::send('mail_arrive_unids', $info1, function ($message) use($producto_almacen){
+            //envia email para el cliente
+            $message->cc($producto_almacen->almacene->email, $producto_almacen->almacene->nombre)->subject('Administración Ordenatech');
+            //envia email a administración
+            $message->bcc(config('app.admin.reply'), config('app.admin.user'));
+            //info del que envia
+            $message->from(config('app.admin.mail'), config('app.admin.user'));
+
+
+          });
+          return redirect()->action('ProductoController@show', ['producto'=>$producto_almacen])->with('info', 'unidad enviada correctamente');
+
+          }
+        }
+/*
         //crea producto
         $producto_cambio = $producto->replicate();
         $producto_cambio->almacene()->dissociate($producto_cambio->almacene);
@@ -219,34 +242,11 @@ class ProductoController extends Controller
         //guarda
         $producto->save();
 
-      //envia email a el alamacen donde se encuentra el producto para que lo envien al nuevo alamcen 
-      $info = ['producto' => $producto, 'producto_cambio' => $producto_cambio];
-
-      Mail::send('mail_send_unids', $info, function ($message) use($producto){
-        //envia email para el cliente
-        $message->cc($producto->almacene->email, $producto->almacene->nombre)->subject('Administración OrdenaTech');
-        //envia email a administración
-        $message->bcc(config('app.admin.reply'), config('app.admin.user'));
-        //info del que envia
-        $message->from(config('app.admin.mail'), config('app.admin.user'));
-
+      
       });
-
-
-      //Email al que recibe el producto 
-      Mail::send('mail_arrive_unids', $info, function ($message) use($producto_cambio){
-        //envia email para el cliente
-        $message->cc($producto_cambio->almacene->email, $producto_cambio->almacene->nombre)->subject('Administración Ordenatech');
-        //envia email a administración
-        $message->bcc(config('app.admin.reply'), config('app.admin.user'));
-        //info del que envia
-        $message->from(config('app.admin.mail'), config('app.admin.user'));
-
-      });
-
+*/
         //redirige a show
-        return redirect()->action('ProductoController@show', ['producto'=>$producto_cambio])->with('info', 'almacen actualizado correctamente');
+        return redirect()->action('ProductoController@show', ['producto'=>$producto])->with('info', 'almacen actualizado correctamente');
     }
-
 
 }
