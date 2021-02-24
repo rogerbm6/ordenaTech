@@ -47,7 +47,7 @@ class UnidController extends Controller
         $producto= $unidad->producto;
         $unidad->delete();
 
-        //si hay menos de 3 envia un email a los administradores
+        //si hay menos de la cantidad minima envia un email a los administradores y el cliente
         if (count($producto->unids) <= $producto->cantidad_minima ) {
             //variable usada en la vista blade 'mail'
             $info = ['producto' => $producto];
