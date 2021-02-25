@@ -93,7 +93,7 @@ class RoleController extends Controller
   {
       $rol->delete();
 
-      return redirect()->action('RoleController@index')->with('info', 'Rol eliminado correctamente');
+      return redirect()->action('RoleController@index')->with('eliminar', 'si');
 
   }
 }

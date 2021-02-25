@@ -58,43 +58,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-    @if (session('eliminar') == 'si')
-        <script>
-            Swal.fire(
-                    '¡Eliminado!',
-                    'Se eliminó con éxito',
-                    'success'
-                    );    
-        </script>
-    @endif
-
-    <script>
-
-        $('.eliminar').submit(function(e){
-            console.log('si');
-            e.preventDefault();
-
-            Swal.fire({
-            title: '¿Estás seguro?',
-            text: "Se eliminará por completo!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, eliminar!',
-            cancelButtonText: 'cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.submit();
-                    
-                }
-            });
-        });
-        
-    </script>
-
     @include('partials.tables')
-
+    @include('partials.popup')
 
     <!-- FontAwesome JS-->
     <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
