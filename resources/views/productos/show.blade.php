@@ -162,9 +162,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                                                         </div>
 
                                                         <div class="col-md-2 col-sm-12 my-md-0 mb-sm-2">
+                                                            @can ('productos.edit')
                                                             <button type="submit" class="btn btn-warning">
                                                                 <i class="fas fa-edit"></i>
                                                             </button>
+                                                            @endcan
 
                                                         </form>
                                                         <form
@@ -173,12 +175,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                                                             style="display:inline">
                                                             {{ method_field('DELETE') }}
                                                             {!! csrf_field() !!}
+                                                            @can ('productos.destroy')
                                                             <button
                                                                 type="submit"
                                                                 class="btn btn-danger my-md-0 mb-sm-2"
                                                                 style="display:inline">
                                                                 <i class="fas fa-trash"></i>
                                                             </button>
+                                                            @endcan
                                                         </form>
                                                     </div>
                                                     @endforeach
@@ -190,7 +194,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                                         </div>
 
                                         <p class="d-flex justify-content-center">
-
+                                            @can ('productos.create')
                                             <a
                                                 class="btn btn-primary m-3 "
                                                 data-toggle="collapse"
@@ -200,7 +204,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                                                 aria-controls="collapseExample">
                                                 <i class="fas fa-plus"></i>
                                             </a>
-
+                                            @endcan
                                         </p>
                                         <div class="collapse" id="collapseExample">
                                             <div class="card card-body">
@@ -254,10 +258,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                            <button type="submit" class="btn btn-primary">
-                                                Actualizar
-                                            </button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
                                         </div>
 
                                     </div>
