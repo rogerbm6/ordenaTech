@@ -72,7 +72,7 @@ class UserController extends Controller
   {
       $user->delete();
 
-      return redirect()->action('UserController@index')->with('info', 'Usuario eliminado correctamente');
+      return redirect()->action('UserController@index')->with('eliminar', 'si');
 
   }
 }
