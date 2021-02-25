@@ -155,7 +155,7 @@ class ProductoController extends Controller
     {
         $producto->delete();
 
-        return redirect()->action('ProductoController@index')->with('info', 'producto eliminado correctamente');
+        return redirect()->action('ProductoController@index')->with('eliminar', 'si');
 
     }
 

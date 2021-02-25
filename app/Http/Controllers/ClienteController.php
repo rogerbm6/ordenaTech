@@ -99,7 +99,7 @@ class ClienteController extends Controller
   {
       $cliente->delete();
 
-      return redirect()->action('ClienteController@index')->with('info', 'cliente borrado correctamente');
+      return redirect()->action('ClienteController@index')->with('eliminar', 'si');
 
   }
 

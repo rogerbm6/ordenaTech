@@ -67,7 +67,7 @@ class AlmacenController extends Controller
   {
       $almacen->delete();
 
-      return redirect()->action('AlmacenController@index');
+      return redirect()->action('AlmacenController@index')->with('eliminar', 'si');
 
   }
 }

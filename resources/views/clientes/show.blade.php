@@ -48,7 +48,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
             @endcan
 
             @can ('clientes.destroy')
-            <form action="" method="POST" style="display:inline">
+            <form action="" method="POST" style="display:inline" class='eliminar'>
                 {{ method_field('DELETE') }}
                 {!! csrf_field() !!}
                 <button type="submit" class="btn btn-danger" style="display:inline">
