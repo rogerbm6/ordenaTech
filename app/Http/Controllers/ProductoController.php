@@ -12,6 +12,9 @@ use Mail;
 use App\Http\Requests\ProductoFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
+
+use App\Exports\ProductExport;
 
 class ProductoController extends Controller
 {
@@ -267,5 +270,9 @@ class ProductoController extends Controller
         //redirige a show
         return redirect()->action('ProductoController@show', ['producto'=>$producto_cambio])->with('info', 'almacen actualizado correctamente');
     }
-
+  
+    public function exportExcel()
+    {
+      return Excel::download(new ProductExport, 'product-list.xlsx');
+    }
 }

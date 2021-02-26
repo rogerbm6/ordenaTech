@@ -143,6 +143,10 @@ Route::middleware(['auth','verified'])->group(function () {
       Route::get('cliente/pdf/{cliente}', 'ClienteController@exportPdf')->name('clientes.pdf')
             ->middleware('permission:clientes.index');
 
+    //Descarga Excel de todos los productos
+      Route::get('productos/excel', 'ProductoController@exportExcel')->name('productos.excel')
+            ->middleware('permission:productos.index');
+
     /*-------------------Usuarios------------------*/
     //Muesta user
       Route::get('user', 'UserController@index')->name('user.index')

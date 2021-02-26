@@ -18,10 +18,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 @extends('layouts.master')
 
 @section('content')
+<div class="d-flex justify-content-between">
+    <div class="p-2 ">
+        <a type="button" href="/home" class="btn btn-sm btn-info m-1">
+            <i class="fas fa-angle-left"></i> volver
+        </a>
+    </div>
+    <div class="p-2 mr-md-5">
+        @can('almacenes.index')
+        @can ('clientes.index')
+        <div class="mr-md-4">
+            <a type="button" href="{{route('productos.excel')}}" class="btn btn-success mr-md-5"><i class="fas fa-file-pdf"></i> Exportar Excel</a>
+    
+        </div>
+        @endcan
+        @endcan
+    </div>
+    
+</div>
 
-<a type="button" href="/home" class="btn btn-sm btn-info m-1">
-    <i class="fas fa-angle-left"></i> volver
-</a>
 
 <div class="col-md-11 m-2 p-2">
 
