@@ -139,6 +139,7 @@ Route::middleware(['auth','verified'])->group(function () {
       Route::delete('cliente/{cliente}', 'ClienteController@destroy')->name('clientes.destroy')
             ->middleware('permission:clientes.destroy');
 
+    /*-------------------exports------------------- */
     //Descarga pdf de cliente
       Route::get('cliente/pdf/{cliente}', 'ClienteController@exportPdf')->name('clientes.pdf')
             ->middleware('permission:clientes.index');
@@ -146,6 +147,12 @@ Route::middleware(['auth','verified'])->group(function () {
     //Descarga Excel de todos los productos
       Route::get('productos/excel', 'ProductoController@exportExcel')->name('productos.excel')
             ->middleware('permission:productos.index');
+    //Descarga Excel de todos los productos de un almacen
+      Route::get('almacen/{almacen}/excel', 'AlmacenController@exportExcel')->name('almacenes.excel')
+            ->middleware('permission:almacenes.index');
+    //Descarga Excel de todos los productos de un cliente
+      Route::get('cliente/{cliente}/excel', 'ClienteController@exportExcel')->name('clientes.excel')
+            ->middleware('permission:clientes.index');
 
     /*-------------------Usuarios------------------*/
     //Muesta user

@@ -7,6 +7,9 @@ use App\Producto;
 use Barryvdh\DomPDF\Facade as PDF;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\ClienteFormRequest;
+//excel
+use App\Exports\ClienteExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ClienteController extends Controller
 {
@@ -113,5 +116,11 @@ class ClienteController extends Controller
 
     }
 
+    public function exportExcel(Cliente $cliente)
+    {
+      $export = new ClienteExport;
+      $export->id=$cliente->id;
+      return Excel::download($export, "Productos_cliente_$cliente->nombre-list.xlsx");
+    }
 
 }

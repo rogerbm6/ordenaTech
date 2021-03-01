@@ -15,11 +15,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
-@extends('layouts.master')
-
-@section('content')
-
-@if (session('info'))
+@extends('layouts.master') @section('content') @if (session('info'))
 <div class="row justify-content-center">
     <div class="col-sm-12">
         <div class="alert alert-success">
@@ -29,39 +25,67 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 </div>
 @endif
 <div class="row">
-    <div class="col-sm-8">
+    <div class="d-flex justify-content-start ml-md-3">
         <div class="container text-light">
 
             <h1>{{$almacen->nombre}}</h1>
             <h5>{{$almacen->email}}</h5>
 
-            <p><span class="font-weight-bold">Direccion:</span> {{$almacen->direccion}}</p>
-            <p><span class="font-weight-bold">Código postal:</span> {{$almacen->cp}}</p>
-            
-            <p><span class="font-weight-bold">Isla:</span> {{$almacen->isla}}</p>
+            <p>
+                <span class="font-weight-bold">Direccion:</span>
+                {{$almacen->direccion}}</p>
+            <p>
+                <span class="font-weight-bold">Código postal:</span>
+                {{$almacen->cp}}</p>
 
+            <p>
+                <span class="font-weight-bold">Isla:</span>
+                {{$almacen->isla}}</p>
 
-            <a type="button" href="{{route('almacenes.index')}}" class="btn btn-sm btn-info m-1"><i class="fas fa-angle-left"></i> Volver</a>
+            <div class="d-flex flex-md-wrap">
+                <a
+                    type="button"
+                    href="{{route('almacenes.index')}}"
+                    class="btn btn-sm btn-info m-1">
+                    <i class="fas fa-angle-left"></i>
+                    Volver</a>
 
-            @can ('almacenes.edit')
-            <a type="button" href="{{route('almacenes.edit',$almacen->id)}}" class="btn btn-warning"><i class="fas fa-user-edit"></i> Editar</a>
-            @endcan
+                @can ('almacenes.edit')
+                <a
+                    type="button"
+                    href="{{route('almacenes.edit',$almacen->id)}}"
+                    class="btn btn-warning m-1">
+                    <i class="fas fa-user-edit"></i>
+                    Editar</a>
+                @endcan @can ('almacenes.destroy')
+                <form action="" method="POST" style="display:inline" class="eliminar m-1">
+                    {{ method_field('DELETE') }}
+                    {!! csrf_field() !!}
+                    <button
+                        type="submit"
+                        class="btn btn-danger"
+                        style="display:inline"
+                        id="eliminar">
+                        <i class="fas fa-trash"></i>
+                        Borrar
+                    </button>
+                </form>
+                @endcan @can('productos.index') @can ('clientes.index')
 
-            @can ('almacenes.destroy')
-            <form action="" method="POST" style="display:inline" class="eliminar">
-                {{ method_field('DELETE') }}
-                {!! csrf_field() !!}
-                <button type="submit" class="btn btn-danger" style="display:inline" id="eliminar">
-                    <i class="fas fa-trash"></i> Borrar
-                </button>
-            </form>
-            @endcan
+                <a
+                    type="button"
+                    href="{{route('almacenes.excel', $almacen->id)}}"
+                    class="btn btn-success mr-md-5 m-1">
+                    <i class="fas fa-file-pdf"></i>
+                    Exportar Excel</a>
+
+                @endcan @endcan
+
+            </div>
         </div>
     </div>
 
 </div>
-
-
 
 <div class="col-md-11 m-2 p-2">
 
@@ -71,24 +95,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
             <div class="alert alert-danger">
                 <ul>
                     @foreach($errors->all() as $error)
-                        <li>{{$error}}</li>
-                        @endforeach
+                    <li>{{$error}}</li>
+                    @endforeach
                 </ul>
             </div>
         </div>
     </div>
     @endif
 
-
     <div class="card mb-5">
         <div class="card-header border-0">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">{{$almacen->productos->count()}} Productos</h3>
+                    <h3 class="mb-0">{{$almacen->productos->count()}}
+                        Productos</h3>
                 </div>
                 @can('producto.create')
                 <div class="col text-right d-inline p-1">
-                    <a type="button" class="btn btn-sm btn-primary m-1" href="{{route('producto.redirect')}}">
+                    <a
+                        type="button"
+                        class="btn btn-sm btn-primary m-1"
+                        href="{{route('producto.redirect')}}">
                         <i class="fa fa-plus-square"></i>
                         Agregar producto al almacen
                     </a>

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AlmaceneFormRequest;
 use App\Almacene;
-
 use Yajra\DataTables\Facades\DataTables;
+//excel
+use App\Exports\AlmacenExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AlmacenController extends Controller
 {
@@ -69,5 +71,13 @@ class AlmacenController extends Controller
 
       return redirect()->action('AlmacenController@index')->with('eliminar', 'si');
 
+  }
+
+  
+  public function exportExcel(Almacene $almacen)
+  {
+    $export = new AlmacenExport;
+    $export->id=$almacen->id;
+    return Excel::download($export, "Productos_almacen_$almacen->nombre-list.xlsx");
   }
 }

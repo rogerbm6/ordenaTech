@@ -273,6 +273,6 @@ class ProductoController extends Controller
   
     public function exportExcel()
     {
-      return Excel::download(new ProductExport, 'product-list.xlsx');
+      return Excel::download(new ProductExport, 'AllProductos-list.xlsx');
     }
 }

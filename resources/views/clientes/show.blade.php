@@ -15,11 +15,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
-@extends('layouts.master')
-
-@section('content')
-
-@if (session('info'))
+@extends('layouts.master') @section('content') @if (session('info'))
 <div class="row justify-content-center">
     <div class="col-sm-12">
         <div class="alert alert-success">
@@ -30,43 +26,73 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
 @endif
 
 <div class="row">
-    <div class="col-sm-8">
+    <div class=" ml-md-3">
         <div class="container text-light">
 
             <h1>{{$cliente->nombre}}</h1>
             <h5>{{$cliente->email}}</h5>
-            <p><span class="font-weight-bold">Telefono:</span> {{$cliente->telefono}}</p>
-            <p><span class="font-weight-bold">Tipo:</span> {{$cliente->tipo}}</p>
+            <p>
+                <span class="font-weight-bold">Telefono:</span>
+                {{$cliente->telefono}}</p>
+            <p>
+                <span class="font-weight-bold">Tipo:</span>
+                {{$cliente->tipo}}</p>
 
-            <p><span class="font-weight-bold">Direccion:</span> {{$cliente->direccion ? "$cliente->direccion" : 'No tiene'}}</p>
+            <p>
+                <span class="font-weight-bold">Direccion:</span>
+                {{$cliente->direccion ? "$cliente->direccion" : 'No tiene'}}</p>
 
+            <div class="d-inline-flex">
+                <div>
+                    <a
+                        type="button"
+                        href="{{route('clientes.index')}}"
+                        class="btn btn-sm btn-info m-1">
+                        <i class="fas fa-angle-left"></i>
+                        Volver</a>
 
-            <a type="button" href="{{route('clientes.index')}}" class="btn btn-sm btn-info m-1"><i class="fas fa-angle-left"></i> Volver</a>
+                    @can ('clientes.edit')
+                    <a
+                        type="button"
+                        href="{{route('clientes.edit',$cliente->id)}}"
+                        class="btn btn-warning m-1">
+                        <i class="fas fa-user-edit"></i>
+                        Editar</a>
+                    @endcan @can ('clientes.destroy')
+                    <form action="" method="POST" style="display:inline" class='eliminar'>
+                        {{ method_field('DELETE') }}
+                        {!! csrf_field() !!}
+                        <button type="submit" class="btn btn-danger m-1" style="display:inline">
+                            <i class="fas fa-trash"></i>
+                            Borrar
+                        </button>
+                    </form>
 
-            @can ('clientes.edit')
-            <a type="button" href="{{route('clientes.edit',$cliente->id)}}" class="btn btn-warning"><i class="fas fa-user-edit"></i> Editar</a>
-            @endcan
+                </div>
+                <div class="">
+                    @endcan @can ('productos.index')
+                    <a
+                        type="button"
+                        href="{{route('clientes.pdf',$cliente->id)}}"
+                        class="btn btn-success m-1">
+                        <i class="fas fa-file-pdf"></i>
+                        Exportar PDF</a>
+                    
+                    
+                    <a
+                        type="button"
+                        href="{{route('clientes.excel',$cliente->id)}}"
+                        class="btn btn-success m-1">
+                        <i class="fas fa-file-excel"></i>
+                        Exportar Excel</a>
+                    @endcan
 
-            @can ('clientes.destroy')
-            <form action="" method="POST" style="display:inline" class='eliminar'>
-                {{ method_field('DELETE') }}
-                {!! csrf_field() !!}
-                <button type="submit" class="btn btn-danger" style="display:inline">
-                    <i class="fas fa-trash"></i> Borrar
-                </button>
-            </form>
-            @endcan
+                </div>
+            </div>
         </div>
     </div>
-    @can ('productos.index')
-      <div class="col-sm-2 ml-4">
-          <a type="button" href="{{route('clientes.pdf',$cliente->id)}}" class="btn btn-success"><i class="fas fa-file-pdf"></i> Exportar PDF</a>
 
-      </div>
-    @endcan
 </div>
-
-
 
 <div class="col-md-11 m-2 p-2">
 
@@ -76,25 +102,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
             <div class="alert alert-danger">
                 <ul>
                     @foreach($errors->all() as $error)
-                        <li>{{$error}}</li>
-                        @endforeach
+                    <li>{{$error}}</li>
+                    @endforeach
                 </ul>
             </div>
         </div>
     </div>
     @endif
 
-
     <div class="card mb-5">
         <div class="card-header border-0">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">{{$cliente->productos->count()}} Productos</h3>
+                    <h3 class="mb-0">{{$cliente->productos->count()}}
+                        Productos</h3>
                 </div>
 
                 <div class="col text-right d-inline p-1">
                     @can('productos.create')
-                    <a type="button" class="btn btn-sm btn-primary m-1" href="{{route('producto.create',$cliente->id)}}">
+                    <a
+                        type="button"
+                        class="btn btn-sm btn-primary m-1"
+                        href="{{route('producto.create',$cliente->id)}}">
                         <i class="fa fa-plus-square"></i>
                         Agregar productos al cliente
                     </a>
