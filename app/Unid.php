@@ -20,4 +20,9 @@ class Unid extends Model
     {
         return $this->belongsTo('App\Producto');
     }
+
+    public function albarans()
+    {
+        return $this->belongsToMany('App\Albaran'); 
+    }
 }
