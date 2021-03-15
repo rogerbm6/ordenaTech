@@ -18,6 +18,6 @@ class Albaran extends Model
 
     public function unids()
     {
-        return $this->belongsToMany('App\Unid');
+        return $this->hasMany('App\Unid');
     }
 }

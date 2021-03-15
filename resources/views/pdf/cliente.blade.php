@@ -73,7 +73,8 @@
             @endforeach
             <div class="page-footer font-small bg-light pt-4">
                 <div class="text-center">
-                    <p>GRACIAS POR CONFIAR EN NOSOTROS</p>
+                    <p>GRACIAS POR CONFIAR EN NOSOTROS <br>
+                    soporte@ordenatech.es</p>
                 </div>
             </div>
         

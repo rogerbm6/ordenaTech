@@ -93,6 +93,12 @@ Route::middleware(['auth','verified'])->group(function () {
       Route::post('producto/{producto}/unidad', 'UnidController@store')->name('unid.store')
             ->middleware('permission:productos.create');
 
+
+      /*-------------------Albaran------------------*/
+      //guarda un albaran
+      Route::post('producto/albaran/{producto}', 'AlbaranController@store')->name('albaran.store')
+      ->middleware('permission:productos.create');
+
       /*-------------------Almacenes------------------*/
     //crear almacen (post)
       Route::post('almacen/store', 'AlmacenController@store')->name('almacenes.store')
