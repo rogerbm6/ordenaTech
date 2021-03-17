@@ -26,7 +26,7 @@ class AlbaranFormRequest extends FormRequest
     {
         return [
             'referencia'            => 'required|max:45',
-            'ruta'                  => 'image|mimes:jpeg,png,jpg,gif|max:2048|required'
+            'ruta'                  => 'mimes:jpeg,png,jpg,gif,pdf|max:2048|required'
         ];
     }
 
@@ -40,9 +40,8 @@ class AlbaranFormRequest extends FormRequest
     {
         return
         [
-            'required'        => 'Es necesario rellenar el campo :attribute',
+            'required'      => 'Es necesario rellenar el campo :attribute',
             'ruta.mimes'    => 'El campo :attribute solo puede ser de tipos jpeg,png,jpg,gif',
-            'ruta.image'    => 'El campo :attribute solo puede ser una imagen',
             'ruta.max'      => 'El campo :attribute solo puede ser una imagen de :max',
         ];
     }

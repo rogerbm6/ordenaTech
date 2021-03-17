@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use App\Albaran;
 use App\Unid;
 use App\Producto;
 use App\Http\Requests\AlbaranFormRequest;
+use Illuminate\Http\Request;
 
 class AlbaranController extends Controller
 {
@@ -37,5 +38,17 @@ class AlbaranController extends Controller
 
         //redirige a show
         return redirect()->action('ProductoController@show', ['producto'=>$producto])->with('info', 'albaran agregado correctamente');
+    }
+
+    public function search(Request $request)
+    {
+        //escrito en el buscador
+        $term = $request->term;
+
+        $query = Albaran::where('referencia', 'like', "%$term%")
+                            ->orderBy('id', 'desc')
+                            ->select('referencia as label')
+                            ->get();
+        return $query;
     }
 }

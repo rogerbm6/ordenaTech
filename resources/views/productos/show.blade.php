@@ -323,8 +323,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                                                                         <input
                                                                         type="text"
                                                                         class="searchReferencia form-control m-md-0 m-sm-2"
-                                                                        id="referencia"
+                                                                        id="referencia{{$unidad->id}}"
                                                                         name="referencia"
+                                                                        autocomplete="off"
                                                                         value="{{$unidad->albaran->referencia ?? 'no tiene'}}">
                                                                     </div>
                                                                     

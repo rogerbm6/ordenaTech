@@ -97,7 +97,13 @@ Route::middleware(['auth','verified'])->group(function () {
       /*-------------------Albaran------------------*/
       //guarda un albaran
       Route::post('producto/albaran/{producto}', 'AlbaranController@store')->name('albaran.store')
-      ->middleware('permission:productos.create');
+      ->middleware('permission:productos.edit');
+      //muestra albaranes vía ajax
+      Route::get('search', 'AlbaranController@search')->name('albaran.search')
+      ->middleware('permission:productos.show');      
+      //asocia una unidad a un albaran
+      Route::post('producto/{producto}/albaran/{albaran}', 'AlbaranController@associate')->name('albaran.associate')
+      ->middleware('permission:productos.edit');
 
       /*-------------------Almacenes------------------*/
     //crear almacen (post)

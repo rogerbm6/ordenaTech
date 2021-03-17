@@ -32,3 +32,7 @@ footer {
 .bg-ordena{
   background-color: #fdd1b3;
 }
+
+.ui-widget-content{
+  z-index:1513;
+}
