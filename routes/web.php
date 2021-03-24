@@ -75,10 +75,7 @@ Route::middleware(['auth','verified'])->group(function () {
     //Elimina un producto
       Route::delete('producto/{producto}', 'ProductoController@destroy')->name('producto.destroy')
             ->middleware('permission:productos.destroy');
-    //para enviar unidades
-      //crear producto (post)
-      Route::post('producto/{producto_antiguo}/{producto_nuevo}/{almacen_antiguo}/{almacen_nuevo}/{unidades}', 'ProductoController@emailCambioAlmacen')->name('producto.send')
-            ->middleware('permission:productos.edit');
+
 
       /*-------------------Unnidades------------------*/
       //actualiza la unidad de un producto
@@ -102,8 +99,11 @@ Route::middleware(['auth','verified'])->group(function () {
       Route::get('search', 'AlbaranController@search')->name('albaran.search')
       ->middleware('permission:productos.show');      
       //asocia una unidad a un albaran
-      Route::post('producto/{producto}/albaran/{albaran}', 'AlbaranController@associate')->name('albaran.associate')
+      Route::post('producto/unidad/{unidad}', 'AlbaranController@associate')->name('albaran.associate')
       ->middleware('permission:productos.edit');
+      //ver albaran
+      Route::get('see/{albaran}', 'AlbaranController@see')->name('albaran.see')
+      ->middleware('permission:productos.show');
 
       /*-------------------Almacenes------------------*/
     //crear almacen (post)

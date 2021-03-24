@@ -16,7 +16,7 @@ class AddAlbaranIdToUnidsTable extends Migration
         Schema::table('unids', function (Blueprint $table) {
             //foranea de albaranes 
             $table->unsignedInteger('albaran_id')->nullable();
-            $table->foreign('albaran_id')->references('id')->on('albarans')->onDelete('cascade');
+            $table->foreign('albaran_id')->references('id')->on('albarans')->onDelete('set null');
         });
     }
 

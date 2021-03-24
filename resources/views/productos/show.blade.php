@@ -298,13 +298,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                                         <div class="modal-body">
 
                                             <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <table class="table table-sm">
+                                                <div class="col-md-12 col-sm-12 table-responsive">
+                                                    <table class="table table-sm ">
                                                         <thead>
                                                             <tr>
                                                                 <th scope="col">N/S</th>
                                                                 <th scope="col">Estado</th>
                                                                 <th scope="col">Albaran</th>
+                                                                <th scope="col"></th>
+                                                                <th scope="col"></th>
                                                                 <th scope="col"></th>
                                                             </tr>
                                                         </thead>
@@ -319,28 +321,47 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                                                                     {{$unidad->estado}}
                                                                 </th>
                                                                 <th>
+                                                                    <form action="{{route('albaran.associate', $unidad->id)}}" method="post">
+                                                                    @csrf
                                                                     <div class="ui-widget">
                                                                         <input
                                                                         type="text"
-                                                                        class="searchReferencia form-control m-md-0 m-sm-2"
+                                                                        class="form-control m-md-0 m-sm-2"
                                                                         id="referencia{{$unidad->id}}"
                                                                         name="referencia"
                                                                         autocomplete="off"
                                                                         value="{{$unidad->albaran->referencia ?? 'no tiene'}}">
                                                                     </div>
-                                                                    
                                                                     </th>
                                                                     <th>
-                                                                        <form>@can ('productos.destroy')
+                                                                        @can ('productos.edit')
                                                                             <button
                                                                                 type="submit"
-                                                                                class="btn btn-danger my-md-0 mb-sm-2"
+                                                                                class="btn btn-info my-md-0 mb-sm-2"
                                                                                 style="display:inline">
-                                                                                <i class="fas fa-trash"></i>
+                                                                                <i class="fas fa-sync-alt"></i>
                                                                             </button>
                                                                             @endcan
-                                                                        </form>
+                                                                        
                                                                     </th>
+                                                                </form>
+
+                                                                <th>
+                                                                    @if ($unidad->albaran)
+                                                                    @can ('productos.show')
+                                                                    <a
+                                                                        href="google."
+                                                                        class="btn btn-success my-md-0 mb-sm-2">
+                                                                        <i class="fas fa-list-alt"></i>
+                                                                    </a>
+                                                                    @endcan
+                                                                    @endif 
+                                                                </th>
+                                                                <th>
+                                                                    @if ($unidad->albaran)
+                                                                    <a href="{{route('albaran.see', $unidad->albaran->id)}}" target="_blank"class="btn btn-info my-md-0 mb-sm-2"><i class="fas fa-eye"></i></a>
+                                                                    @endif    
+                                                                </th>
                                                                 </tr>
                                                                 @endforeach
 
