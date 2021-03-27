@@ -77,7 +77,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                 @if(count($producto->unids)>0)
                 <script
                     src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
+                <!-- buscador de referencia(albaranes) en producto.show -->
                 <script>
                     $(function () {
                         @foreach($producto ->unids as $unid)

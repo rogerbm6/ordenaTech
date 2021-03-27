@@ -46,6 +46,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                     <a class="nav-link" href="{{route('producto.index')}}"><i class="fa fa-cube fa-fw mr-2"></i>Productos</a>
                 </li>
                 @endcan
+                @can('productos.index')
+                <li class="nav-item {{ Request::is('albaran') ? 'active' : ''}}">
+                    <a class="nav-link" href="{{route('albaran.index')}}"><i class="fas fa-file mr-2"></i>Albaranes</a>
+                </li>
+                @endcan
                 @can('almacenes.index')
                 <li class="nav-item {{ Request::is('almacen') ? 'active' : ''}}">
                     <a class="nav-link" href="{{route('almacenes.index')}}"><i class="fas fa-warehouse fa-fw mr-2"></i></i>Almacenes</a>

@@ -15,8 +15,8 @@ class CreateAlbaransTable extends Migration
     {
         Schema::create('albarans', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ruta',20);
-            $table->string('referencia',20);
+            $table->string('ruta',70);
+            $table->string('referencia',40);
             $table->timestamps();
         });
     }

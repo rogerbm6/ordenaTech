@@ -350,7 +350,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                                                                     @if ($unidad->albaran)
                                                                     @can ('productos.show')
                                                                     <a
-                                                                        href="google."
+                                                                        href="{{route('albaran.show', $unidad->albaran)}}"
                                                                         class="btn btn-success my-md-0 mb-sm-2">
                                                                         <i class="fas fa-list-alt"></i>
                                                                     </a>

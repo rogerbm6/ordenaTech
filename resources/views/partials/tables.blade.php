@@ -70,9 +70,6 @@
                     data: 'marca'
                 },
                 {
-                    data: 'modelo'
-                },
-                {
                     data: 'almacen'
                 },
                 {
@@ -308,6 +305,93 @@
                 {
                     data: "btn"
                 },
+            ],
+            "language": {
+                "info": "_TOTAL_ Registros",
+                "search": "Buscar",
+                "paginate": {
+                    "next": "siguiente",
+                    "previous": "anterior"
+                },
+                "lengthMenu": 'Mostrar<select>' +
+                    '<option value="10">10</option>' +
+                    '<option value="20">20</option>' +
+                    '<option value="30">30</option>' +
+                    '<option value="50">50</option>' +
+                    '<option value="-1">Todos</option>' +
+                    '</select> registros',
+                "emptyTable": "No hay datos",
+                "zeroRecords": "Sin resultados",
+            }
+        });
+    });
+</script>
+@endif
+{{-- si está en albaran index --}}
+@if (Request::route()->getName()=='albaran.index')
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#tabla').DataTable({
+            "serverSide": true,
+            "ajax": "{{route('albaran.index')}}",
+            "columns": [{
+                    data: "referencia"
+                },
+                {
+                    data: 'fecha'
+                },
+                {
+                    data: 'btn'
+                },
+            ],
+            "language": {
+                "info": "_TOTAL_ Registros",
+                "search": "Buscar",
+                "paginate": {
+                    "next": "siguiente",
+                    "previous": "anterior"
+                },
+                "lengthMenu": 'Mostrar<select>' +
+                    '<option value="10">10</option>' +
+                    '<option value="20">20</option>' +
+                    '<option value="30">30</option>' +
+                    '<option value="50">50</option>' +
+                    '<option value="-1">Todos</option>' +
+                    '</select> registros',
+                "emptyTable": "No hay datos",
+                "zeroRecords": "Sin resultados",
+            }
+        });
+    });
+</script>
+@endif
+
+{{-- si está en albaran show --}}
+@if (Request::route()->getName()=='albaran.show')
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#tabla').DataTable({
+            "serverSide": true,
+            "ajax": "{{Request::url()}}",
+            "columns": [{
+                    data: "numero_serie"
+                },
+                {
+                    data: 'part_number'
+                },
+                {
+                    data: 'incidencia'
+                },
+                {
+                    data: 'modelo'
+                },
+                {
+                    data: 'nombre'
+                },
+                {
+                    data: 'marca'
+                },
+                
             ],
             "language": {
                 "info": "_TOTAL_ Registros",

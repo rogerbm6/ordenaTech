@@ -105,6 +105,32 @@ Route::middleware(['auth','verified'])->group(function () {
       Route::get('see/{albaran}', 'AlbaranController@see')->name('albaran.see')
       ->middleware('permission:productos.show');
 
+                  //Sección Albaran
+      //crear albaran (post)
+      Route::post('albaran/store', 'AlbaranController@normalStore')->name('albaran.normalStore')
+      ->middleware('permission:productos.create');
+      //Envía a clientes para agregar producto
+      Route::get('albaran/redirect', 'AlbaranController@redirect')->name('albaran.redirect')
+      ->middleware('permission:productos.create');
+      //Crea producto (get)
+      Route::get('albaran/create', 'AlbaranController@create')->name('albaran.create')
+      ->middleware('permission:productos.create');
+      //Muesta productos
+      Route::get('albaran', 'AlbaranController@index')->name('albaran.index')
+      ->middleware('permission:productos.index');
+      //muestra un producto
+      Route::get('albaran/{albaran}', 'AlbaranController@show')->name('albaran.show')
+      ->middleware('permission:productos.show');
+      //devuelve formulario de actualizar
+      Route::get('albaran/{albaran}/edit', 'AlbaranController@edit')->name('albaran.edit')
+      ->middleware('permission:productos.edit');
+      //actualiza un producto
+      Route::put('albaran/{albaran}', 'AlbaranController@update')->name('albaran.update')
+      ->middleware('permission:productos.edit');
+          //Elimina un almacen
+      Route::delete('albaran/{albaran}', 'AlbaranController@destroy')->name('albaran.destroy')
+      ->middleware('permission:productos.destroy');
+
       /*-------------------Almacenes------------------*/
     //crear almacen (post)
       Route::post('almacen/store', 'AlmacenController@store')->name('almacenes.store')

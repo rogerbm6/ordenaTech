@@ -29,32 +29,30 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
     <div class=" ml-md-3">
         <div class="container text-light">
 
-            <h1>{{$cliente->nombre}}</h1>
-            <h5>{{$cliente->email}}</h5>
-            <p>
-                <span class="font-weight-bold">Telefono:</span>
-                {{$cliente->telefono}}</p>
-            <p>
-                <span class="font-weight-bold">Tipo:</span>
-                {{$cliente->tipo}}</p>
-
-            <p>
-                <span class="font-weight-bold">Direccion:</span>
-                {{$cliente->direccion ? "$cliente->direccion" : 'No tiene'}}</p>
+            <h1>Albaran N° "{{$albaran->referencia}}"</h1>
+            <h5>{{$albaran->created_at->format('d-m-Y')}}</h5>
 
             <div class="d-inline-flex">
                 <div>
                     <a
                         type="button"
-                        href="{{route('clientes.index')}}"
+                        href="{{route('albaran.index')}}"
                         class="btn btn-sm btn-info m-1">
                         <i class="fas fa-angle-left"></i>
                         Volver</a>
 
-                    @can ('clientes.edit')
+                        <a
+                        type="button"
+                        href="{{route('albaran.see', $albaran->id)}}"
+                        class="btn btn-primary m-1"
+                        target="_blank">
+                        <i class="fas fa-eye"></i>
+                        Ver albaran</a>
+
+                    @can ('productos.edit')
                     <a
                         type="button"
-                        href="{{route('clientes.edit',$cliente->id)}}"
+                        href="{{route('albaran.edit',$albaran->id)}}"
                         class="btn btn-warning m-1">
                         <i class="fas fa-user-edit"></i>
                         Editar</a>
@@ -69,25 +67,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
                     </form>
 
                 </div>
-                <div class="">
-                    @endcan @can ('productos.index')
-                    <a
-                        type="button"
-                        href="{{route('clientes.pdf',$cliente->id)}}"
-                        class="btn btn-success m-1">
-                        <i class="fas fa-file-pdf"></i>
-                        Exportar PDF</a>
-                    
-                    
-                    <a
-                        type="button"
-                        href="{{route('clientes.excel',$cliente->id)}}"
-                        class="btn btn-success m-1">
-                        <i class="fas fa-file-excel"></i>
-                        Exportar Excel</a>
-                    @endcan
-
-                </div>
+                @endcan
+                
             </div>
         </div>
     </div>
@@ -114,20 +95,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
         <div class="card-header border-0">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">{{$cliente->productos->count()}}
-                        Productos</h3>
-                </div>
-
-                <div class="col text-right d-inline p-1">
-                    @can('productos.create')
-                    <a
-                        type="button"
-                        class="btn btn-sm btn-primary m-1"
-                        href="{{route('producto.create',$cliente->id)}}">
-                        <i class="fa fa-plus-square"></i>
-                        Agregar productos al cliente
-                    </a>
-                    @endcan
+                    <h3 class="mb-0">{{$albaran->unids->count()}}  Productos</h3>
                 </div>
 
             </div>
@@ -137,13 +105,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. --}}
             <table class="table align-items-center table-flush" id='tabla'>
                 <thead class="thead-light">
                     <tr>
+                        <th scope="col">S/N</th>
                         <th scope="col">P/N</th>
                         <th scope="col">Incidencia</th>
                         <th scope="col">Modelo</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Marca</th>
-                        <th scope="col">Almacen</th>
-                        <th scope="col"></th>
                     </tr>
                 </thead>
 
